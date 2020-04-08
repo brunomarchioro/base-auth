@@ -6,6 +6,9 @@ export default () => (
     <Link href="/">
       <a>dynamic</a>
     </Link>{' '}
+    <Link href="/contact">
+      <a>contact</a>
+    </Link>{' '}
     page.
   </div>
 )

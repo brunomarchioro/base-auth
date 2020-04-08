@@ -22,7 +22,7 @@ const Index = () => {
     data.viewer === null &&
     typeof window !== 'undefined'
   ) {
-    router.push('/signin')
+    router.push('/login')
   }
 
   if (data && data.viewer) {
@@ -32,9 +32,15 @@ const Index = () => {
         <Link href="/about">
           <a>static</a>
         </Link>{' '}
+        <Link href="/contact">
+          <a>contact</a>
+        </Link>{' '}
+        <Link href="/profile">
+          <a>profile</a>
+        </Link>{' '}
         page. or{' '}
-        <Link href="/signout">
-          <a>signout</a>
+        <Link href="/logout">
+          <a>logout</a>
         </Link>
       </div>
     )

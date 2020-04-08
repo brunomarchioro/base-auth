@@ -4,26 +4,26 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { withApollo } from '../apollo/client'
 
-const SignOutMutation = gql`
-  mutation SignOutMutation {
-    signOut
+const LogoutMutation = gql`
+  mutation LogoutMutation {
+    logout
   }
 `
 
-function SignOut() {
+function Logout() {
   const client = useApolloClient()
   const router = useRouter()
-  const [signOut] = useMutation(SignOutMutation)
+  const [logout] = useMutation(LogoutMutation)
 
   React.useEffect(() => {
-    signOut().then(() => {
+    logout().then(() => {
       client.resetStore().then(() => {
-        router.push('/signin')
+        router.push('/login')
       })
     })
-  }, [signOut, router, client])
+  }, [logout, router, client])
 
-  return <p>Signing out...</p>
+  return <p>logout...</p>
 }
 
-export default withApollo(SignOut)
+export default withApollo(Logout)
