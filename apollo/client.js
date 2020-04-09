@@ -4,29 +4,31 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 let globalApolloClient = null
 
-export function initApolloClient(ctx = {}, initialState= {}) {
+export function initApolloClient(ctx = {}) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === 'undefined') {
-    return createApolloClient(ctx, initialState)
+    console.log('[server] - creating apollo client')
+    return createApolloClient(ctx)
   }
 
   // Reuse client on the client-side
   if (!globalApolloClient) {
-    globalApolloClient = createApolloClient(ctx, initialState)
+    console.log('[client] - creating apollo client')
+    globalApolloClient = createApolloClient(ctx)
   }
 
+  console.log('[client] - reusing apollo client')
   return globalApolloClient
 }
 
-function createApolloClient(ctx, initialState) {
+function createApolloClient(ctx) {
   const ssrMode = typeof window === 'undefined'
-  const cache = new InMemoryCache().restore(initialState)
 
   return new ApolloClient({
     ssrMode,
     link: createIsomorphLink(ctx),
-    cache,
+    cache: new InMemoryCache()
   })
 }
 
