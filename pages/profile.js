@@ -1,28 +1,38 @@
-import { withApollo } from '../apollo/client'
-import Link from 'next/link'
-import useAuth from "../lib/hooks/auth/useAuth"
+import { useQuery } from "@apollo/react-hooks"
+import gql from "graphql-tag"
+import usePrivateRoute from "../lib/hooks/auth/usePrivateRoute"
 
-const Index = () => {
-  const { data, loading } = useAuth(true)
+const userQuery = gql`
+  {
+    user {
+      id
+      email
+    }
+  }
+`
 
-  console.log(data)
+const Profile = () => {
+  const { isAuthenticated } = usePrivateRoute()
+  const { data, loading } = useQuery(userQuery, {
+    skip: !isAuthenticated
+  })
 
-  if (data && data.viewer) {
+  if (loading) return <p>Loading...</p>
+
+  if (data?.user) {
     return (
       <div>
-        You're signed in as {data.viewer.email} goto{' '}
-        <Link href="/about">
-          <a>static</a>
-        </Link>{' '}
-        page. or{' '}
-        <Link href="/logout">
-          <a>logout</a>
-        </Link>
+        <h1>Profile</h1>
+        <p>{data.user.email}</p>
       </div>
     )
   }
 
-  return <p>Loading...</p>
+  return (
+    <div>
+      <h1>Profile</h1>
+    </div>
+  )
 }
 
-export default withApollo(Index)
+export default Profile

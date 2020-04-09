@@ -2,7 +2,7 @@ import React from 'react'
 import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { withApollo } from '../apollo/client'
+import { useAuth } from "../lib/contexts/AuthContext"
 
 const LogoutMutation = gql`
   mutation LogoutMutation {
@@ -14,10 +14,12 @@ function Logout() {
   const client = useApolloClient()
   const router = useRouter()
   const [logout] = useMutation(LogoutMutation)
+  const { clearAuthData } = useAuth()
 
   React.useEffect(() => {
     logout().then(() => {
       client.resetStore().then(() => {
+        clearAuthData()
         router.push('/login')
       })
     })
@@ -26,4 +28,4 @@ function Logout() {
   return <p>logout...</p>
 }
 
-export default withApollo(Logout)
+export default Logout

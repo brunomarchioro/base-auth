@@ -1,14 +1,14 @@
 import React, { Fragment } from "react"
-import { withApollo } from '../apollo/client'
 import gql from 'graphql-tag'
 import { useForm } from "react-hook-form"
 import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
+import { useAuth } from "../lib/contexts/AuthContext"
 
 const loginMutation = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
-      id
+      fullName
       email
     }
   }
@@ -19,6 +19,7 @@ function Login() {
   const router = useRouter()
   const [login, { error: submitError }] = useMutation(loginMutation)
   const { register, errors, ...methods } = useForm()
+  const { saveAuthData, redirect } = useAuth()
 
   const handleSubmit = async ({ username = "", password = "" }) => {
     try {
@@ -29,8 +30,9 @@ function Login() {
           password
         }
       })
-      if (data.login.id) {
-        await router.push('/')
+      if (data.login) {
+        saveAuthData(data.login)
+        await router.push(redirect || '/')
       }
     } catch (e) {
       console.log(e)
@@ -75,7 +77,7 @@ function Login() {
   )
 }
 
-export default withApollo(Login)
+export default Login
 
 
 
