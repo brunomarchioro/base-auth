@@ -7,14 +7,14 @@ export const typeDefs = gql`
   }
   
   type User {
-    id: ID!
+    userId: ID!
     fullName: String!
     email: String!
     username: String!
   }
   
   type Post {
-    id: ID!
+    postId: ID!
     title: String
     body: String
   }
@@ -30,7 +30,7 @@ export const typeDefs = gql`
     user: User!
     users: [User]
     
-    post(id: ID!): Post!
+    post(postId: ID!): Post!
     posts: [Post]
   }
 
@@ -39,6 +39,6 @@ export const typeDefs = gql`
     logout: Boolean!
     
     createPost(title: String!, body: String): Post!
-    updatePost(id: ID!, title: String, body: String): Post!
+    updatePost(postId: ID!, title: String, body: String): Post!
   }
 `

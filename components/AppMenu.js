@@ -1,7 +1,10 @@
 import Link from "next/link"
 import React from "react"
+import { useAuth } from "../lib/contexts/AuthContext"
 
 const AppMenu = () => {
+  const { isAuthenticated, user } = useAuth()
+
   return (
     <ul className="menu">
       <li>
@@ -25,20 +28,17 @@ const AppMenu = () => {
         </Link>
       </li>
       <li>
-        <Link href={"/SSG/posts"}>
-          <a>posts (SSG)</a>
-        </Link>
-      </li>
-      <li>
-        <Link href={"/SSR/posts"}>
-          <a>posts (SSR)</a>
-        </Link>
-      </li>
-      <li>
         <Link href={"/posts"}>
-          <a>posts (client)</a>
+          <a>posts</a>
         </Link>
       </li>
+      {isAuthenticated && (
+        <li>
+          <Link href={"admin/posts/new"}>
+            <a>new post</a>
+          </Link>
+        </li>
+      )}
 
       {/*language=CSS*/}
       <style jsx>{`

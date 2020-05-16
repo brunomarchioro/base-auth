@@ -1,7 +1,7 @@
+import { useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import Link from "next/link"
 import React from "react"
-import { initApolloClient } from "../../apollo/client"
 
 const postsQuery = gql`
   {
@@ -12,12 +12,16 @@ const postsQuery = gql`
   }
 `
 
-function PostListPage({ posts }) {
+function PostListPage() {
+  const { loading, data } = useQuery(postsQuery);
+
+  if (loading) return 'Loading...';
+
   return (
     <div>
-      <h1>Post list</h1>
+      <h1>Post (client)</h1>
       <ul>
-        {posts.map(post => (
+        {data?.posts.map(post => (
           <li key={post.postId}>
             <Link href={"/posts/[postId]"} as={`/posts/${post.postId}`}>
               <a>{post.title}</a>
@@ -27,16 +31,6 @@ function PostListPage({ posts }) {
       </ul>
     </div>
   )
-}
-
-export async function getStaticProps(ctx) {
-  const apolloClient = initApolloClient(ctx)
-
-  const { data } = await apolloClient.query({
-    query: postsQuery
-  })
-
-  return { props: { posts: data.posts } }
 }
 
 export default PostListPage

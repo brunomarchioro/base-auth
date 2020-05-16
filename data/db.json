@@ -1,389 +1,152 @@
 {
+  "scopes": [
+    {
+      "scopeId": "1",
+      "name": "main"
+    },
+    {
+      "scopeId": "2",
+      "name": "reitoria"
+    }, {
+      "scopeId": "3",
+      "name": "erechim"
+    }
+  ],
+  "contentTypes": [
+    {
+      "contentTypeId": "1",
+      "codename": "posts",
+      "name": "posts"
+    }
+  ],
+  "contentTypesXScopes": [
+    {
+      "contentTypeXScopeId": "1",
+      "contentTypeId": "1",
+      "scopeId": "1"
+    }
+  ],
   "posts": [
     {
-      "id": "db028e60-7d2e-47f9-a701-255a7217855a",
-      "title": "laboriosam illo deleniti",
+      "postId": "1",
+      "title": "reitoria laboriosam illo deleniti",
       "body": "quia ut quia"
     },
     {
-      "id": "17fb4798-7847-4443-99d4-aa004142097c",
-      "title": "soluta fugit nostrum",
-      "body": "non"
+      "postId": "2",
+      "title": "erechim laboriosam illo deleniti",
+      "body": "quia ut quia"
     },
     {
-      "id": "3e171aca-6fd8-47e7-b4e5-399db3e5587d",
-      "title": "quia et odit",
-      "body": "Et id dolores doloremque molestiae magni reprehenderit nihil necessitatibus. Deleniti debitis maxime perspiciatis pariatur repellendus. Et nesciunt tempora qui ut porro placeat magnam. Voluptatem quas quisquam. Saepe et atque quam qui quod maxime pariatur sit."
+      "postId": "3",
+      "title": "reitoria laboriosam illo deleniti",
+      "body": "quia ut quia"
+    }
+  ],
+  "postsXScopes": [
+    {
+      "postXScopeId": "1",
+      "postId": "1",
+      "scopeId": "2"
     },
     {
-      "id": "7d20a577-d18a-480d-99c3-5f5d471562b0",
-      "title": "nesciunt alias provident",
-      "body": "Pariatur officia ut temporibus vitae voluptatum ducimus aperiam vel."
+      "postXScopeId": "2",
+      "postId": "2",
+      "scopeId": "3"
     },
     {
-      "id": "b503b572-11fb-4d74-ad87-66a87e6a7245",
-      "title": "iure adipisci laudantium",
-      "body": "nihil"
-    },
-    {
-      "id": "b8fe2103-faf3-4895-9f50-98423e4c6173",
-      "title": "facere quibusdam commodi",
-      "body": "sunt nobis odio"
-    },
-    {
-      "id": "23d9953e-6ed2-4474-a5cb-07574b850a2e",
-      "title": "quis vel consectetur",
-      "body": "dolor excepturi minus"
-    },
-    {
-      "id": "f9bd9ae8-79b3-461a-9321-f61af2ea8078",
-      "title": "quia est vel",
-      "body": "Esse sunt et sit voluptatem."
-    },
-    {
-      "id": "fa555d02-456c-4d5d-975e-7b22ab4763e1",
-      "title": "qui consequatur omnis",
-      "body": "quo ut accusantium"
-    },
-    {
-      "id": "2c3040c5-53bf-4615-bfe3-ee166e5fb637",
-      "title": "omnis dicta quis",
-      "body": "Totam nulla odio iure molestiae provident voluptatem deserunt quis saepe."
-    },
-    {
-      "id": "f5b58b2e-48ee-48d9-9d8b-eafdffeb693b",
-      "title": "et dolor et",
-      "body": "Pariatur laudantium sit ratione ut tempora eveniet.\nAut molestias asperiores et.\nEt quasi ullam.\nAsperiores sequi mollitia non quasi."
-    },
-    {
-      "id": "ca9f80b8-2a0e-4a71-bf00-2f48f860c427",
-      "title": "doloremque amet asperiores",
-      "body": "Sed esse dolor."
-    },
-    {
-      "id": "6cef6eea-1f0a-4a6b-a855-4bebbfecd69a",
-      "title": "sed architecto aliquid",
-      "body": "Consequatur omnis sed doloribus molestias vero suscipit."
-    },
-    {
-      "id": "0111ce63-74c3-4e75-8242-590409811a86",
-      "title": "velit aut commodi",
-      "body": "Inventore explicabo consequuntur saepe. Beatae et consequatur debitis velit ducimus. Illo ducimus minima adipisci porro cupiditate."
-    },
-    {
-      "id": "9ab6a89f-1e1b-48f0-a2e0-55e24a221f06",
-      "title": "aut asperiores doloribus",
-      "body": "Iure et a illo numquam. Error reprehenderit corrupti iusto cupiditate illo odit et neque. Deserunt libero esse. Omnis harum placeat. Perspiciatis deleniti quidem sunt quo voluptas.\n \rSaepe sit rerum. Omnis qui quibusdam praesentium ut. Aliquam mollitia eaque quo sapiente dolores est ratione enim. Unde sunt debitis est magnam aspernatur sit. Dolorem possimus est voluptas blanditiis qui. Quis harum magni.\n \rNon quaerat quod quam sed. Ut ipsa aspernatur consequatur. Quidem sit dignissimos qui et ratione rerum voluptatem molestiae. Et aut architecto sit quia molestiae eveniet blanditiis alias. Saepe et assumenda amet ut autem est sed quia perspiciatis. Ut possimus minima vero rerum et tempora iure nobis autem."
-    },
-    {
-      "id": "0de9919a-3892-47b1-b701-47f9eba2128c",
-      "title": "omnis ea esse",
-      "body": "Fugiat et optio unde voluptatibus in assumenda. Et rerum sint est. Architecto laborum est quo sequi. Ex voluptas vero perferendis voluptatem accusantium voluptatem. Non dolores quisquam aut ut voluptatem molestias.\n \rEnim animi libero occaecati cupiditate dolorem perferendis numquam consequatur. Adipisci odio itaque aut impedit porro error velit qui. Dolores eveniet quia enim et saepe quisquam recusandae saepe. Earum nesciunt aut. Ratione dicta rerum. Adipisci nam dolore aliquid atque.\n \rAt explicabo harum rem pariatur modi. Rerum et omnis molestiae. Reiciendis eum debitis voluptatem omnis enim sed repellat itaque. Placeat animi impedit possimus asperiores et. Libero error sint doloremque nam omnis possimus eum."
-    },
-    {
-      "id": "e9f052cd-4783-446f-aa7d-1142473e6128",
-      "title": "doloribus deleniti eius",
-      "body": "Eius in ut odit. Amet illo non consequuntur commodi unde cupiditate totam. Quasi eos autem blanditiis magnam. Voluptas sit velit et sed debitis odio. Voluptas possimus consequatur officia eaque. Ducimus enim odio sapiente."
-    },
-    {
-      "id": "9e324afd-8fe2-4319-a57e-354515aa49af",
-      "title": "repellat ab facilis",
-      "body": "Ut quo nisi quia facilis. Nihil id asperiores sint explicabo sunt."
-    },
-    {
-      "id": "063c1cfb-0f49-4255-8e00-f8e329eb4d6e",
-      "title": "inventore accusantium sed",
-      "body": "Sed quis eum porro culpa."
-    },
-    {
-      "id": "7b782b26-104a-447c-b1c2-b9ab80999e0f",
-      "title": "sunt officia earum",
-      "body": "Et sapiente est iusto ratione eos quae."
-    },
-    {
-      "id": "9b1fe6e0-7d50-43ea-a6af-9788d729cab1",
-      "title": "iste accusamus unde",
-      "body": "inventore tempore commodi"
-    },
-    {
-      "id": "975b64b1-a63e-4080-8b5b-5caf64bf10ab",
-      "title": "omnis ea qui",
-      "body": "omnis"
-    },
-    {
-      "id": "adc30a57-f51b-4e5d-86fc-15a3b59678fc",
-      "title": "temporibus harum ut",
-      "body": "Sint ea autem.\nIure quasi pariatur praesentium minima reiciendis.\nUnde dolor tenetur.\nFugiat voluptates aliquam et iusto voluptatem quis asperiores officiis.\nCum facere ipsam sed officia."
-    },
-    {
-      "id": "dc747f1c-f2e5-486c-9d51-100d453488d6",
-      "title": "voluptas dicta in",
-      "body": "A et aliquid quod."
-    },
-    {
-      "id": "d952361c-7633-4216-8824-1e1d769a280b",
-      "title": "nihil consequatur voluptatem",
-      "body": "Consequuntur soluta ea earum perferendis laborum animi similique omnis. Aut aut voluptas et eum ab quibusdam iusto eos labore. Fugiat vitae doloribus sed voluptatem quis rerum. Quis quibusdam ea natus. Modi eos aliquam aut at optio. Totam neque officiis qui id et qui id dolor expedita."
-    },
-    {
-      "id": "78647ee5-0361-473c-970a-572fdc748c33",
-      "title": "occaecati omnis ducimus",
-      "body": "Ipsum dicta praesentium veniam cum asperiores tempore dolorum. Ut est nisi ex aut labore dolore."
-    },
-    {
-      "id": "b5ef806e-f244-4444-b501-90850a9b7a0d",
-      "title": "tempore ipsum impedit",
-      "body": "Aspernatur vel doloribus voluptatem officiis. Est ab et ex sequi maiores fugit atque voluptate dicta. Accusantium voluptates atque id. Id corporis quia autem eligendi rerum maiores quod quis. Et culpa praesentium possimus."
-    },
-    {
-      "id": "6838312c-e94d-431f-ade8-235fb434e992",
-      "title": "beatae voluptates autem",
-      "body": "Commodi impedit perspiciatis eveniet pariatur voluptatum quam modi officiis.\nEnim quod officiis possimus est eum quam vel."
-    },
-    {
-      "id": "79aab327-968a-4950-950c-fa6fe6f5b76d",
-      "title": "est praesentium sed",
-      "body": "Ut asperiores non saepe et et unde et.\nExcepturi perspiciatis ipsa vel repudiandae sed assumenda.\nEnim aspernatur rerum non consequuntur et eaque qui.\nPossimus molestias doloribus et repudiandae repudiandae earum."
-    },
-    {
-      "id": "ecb32bcc-036f-488c-b65e-814de5aa1cc9",
-      "title": "quisquam officia incidunt",
-      "body": "et"
-    },
-    {
-      "id": "c00e1a03-2aec-43e3-b47e-8fcdbcddf021",
-      "title": "quo quaerat at",
-      "body": "Rerum at suscipit dolorem ut qui iusto. Sed occaecati omnis. Qui iste voluptatum quasi nemo a. Recusandae ex voluptatem quo cumque. Nesciunt hic possimus dolorem quo occaecati quos sapiente et in."
-    },
-    {
-      "id": "86e4a13c-13d1-4ab1-8939-615250495554",
-      "title": "testeeee"
+      "postXScopeId": "3",
+      "postId": "3",
+      "scopeId": "2"
     }
   ],
   "users": [
     {
-      "id": "583b7b54-af48-4831-a437-57b1a7b94239",
+      "userId": "1",
+      "isSuperuser": true,
       "fullName": "Administrator",
-      "email": "Scottie.OConner@hotmail.com",
+      "email": "admin@baseauth.com",
       "username": "admin",
       "password": "1234"
     },
     {
-      "id": "5439185d-fddd-4ef8-802e-85ffc14a8702",
-      "fullName": "Darwin Kutch}",
-      "email": "Macy_Ryan38@yahoo.com",
-      "username": "Emmie.Doyle",
-      "password": "KjkUwGfUtT2B_lc"
+      "userId": "2",
+      "isSuperuser": false,
+      "fullName": "User DICOM",
+      "email": "user.dicom@baseauth.com",
+      "username": "dicom",
+      "password": "1234"
     },
     {
-      "id": "7b780895-755b-4517-b761-9140b03478a4",
-      "fullName": "Polly Osinski}",
-      "email": "Alexandra_Von@hotmail.com",
-      "username": "Green_OConnell9",
-      "password": "WJOJUlCBoWcUMHy"
+      "userId": "3",
+      "isSuperuser": false,
+      "fullName": "User ASSCOM",
+      "email": "user.asscom@baseauth.com",
+      "username": "asscom",
+      "password": "1234"
+    }
+  ],
+  "groups": [
+    {
+      "groupId": "1",
+      "name": "editor"
     },
     {
-      "id": "8dcc7cee-dfd9-401c-8313-a171a840c4ab",
-      "fullName": "Arlie Erdman}",
-      "email": "Ricardo.Hilpert78@hotmail.com",
-      "username": "Leanne.Ankunding",
-      "password": "htO6ohArJchavZ6"
+      "groupId": "2",
+      "name": "DICOM"
     },
     {
-      "id": "855a3b31-b3aa-44e2-9f38-4086a721f09e",
-      "fullName": "Arianna Bahringer}",
-      "email": "Marjolaine.Homenick@gmail.com",
-      "username": "Cindy.Kunde",
-      "password": "z9XJFvjrRWNWmVp"
+      "groupId": "3",
+      "name": "ASSCOM"
+    }
+  ],
+  "groupsXUsers": [
+    {
+      "groupXUserId": "1",
+      "groupId": "2",
+      "userId": "2"
     },
     {
-      "id": "35c5d3a5-96c5-41ad-a282-6955900b0d53",
-      "fullName": "Jonatan Prohaska}",
-      "email": "Aylin_Beer81@yahoo.com",
-      "username": "Valentina94",
-      "password": "BCM8GjVyTPXeGFM"
+      "groupXUserId": "2",
+      "groupId": "3",
+      "userId": "3"
+    }
+  ],
+  "permissions": [
+    {
+      "permissionId": "1",
+      "groupId": "2",
+      "contentTypeId": "1",
+      "roles": ["publish", "read", "create", "update", "delete"]
     },
     {
-      "id": "1999e415-5935-406d-9b14-77e9a795ada4",
-      "fullName": "Delta Blick}",
-      "email": "Joelle.Lang@yahoo.com",
-      "username": "Alta_Breitenberg",
-      "password": "8iTVkhcYFJTawsE"
+      "permissionId": "2",
+      "groupId": "3",
+      "contentTypeId": "1",
+      "roles": ["publish", "read", "create", "update", "delete"]
     },
     {
-      "id": "21688297-e82c-4d88-8a6e-8a528652c5d5",
-      "fullName": "Ollie Funk}",
-      "email": "Josefa36@yahoo.com",
-      "username": "Jonathon.McClure34",
-      "password": "62Y7g62XUhcIBz9"
+      "permissionId": "3",
+      "groupId": "3",
+      "contentTypeId": "1",
+      "roles": ["read"]
+    }
+  ],
+  "permissionsXScopes": [
+    {
+      "permissionXScopeId": "1",
+      "permissionId": "2",
+      "scopeId": "2"
     },
     {
-      "id": "44cc2879-0245-463f-b280-3a1cbf3f6eaf",
-      "fullName": "Alta Johnson}",
-      "email": "Thad.Halvorson98@gmail.com",
-      "username": "Felicita.Medhurst22",
-      "password": "EktSUDW_Wt4w0Gb"
+      "permissionXScopeId": "2",
+      "permissionId": "2",
+      "scopeId": "3"
     },
     {
-      "id": "c526dc09-8bac-4c10-9dcd-458c67770b33",
-      "fullName": "Tatyana Pacocha}",
-      "email": "Selmer_Little@gmail.com",
-      "username": "Floyd_Hermann43",
-      "password": "mE9qtTjFingQjhc"
-    },
-    {
-      "id": "500136fb-c278-4ddd-93ce-956604020b62",
-      "fullName": "Raphaelle Tillman}",
-      "email": "Milford.Stiedemann91@yahoo.com",
-      "username": "Lyda36",
-      "password": "nsin9aLZ_iXg6SZ"
-    },
-    {
-      "id": "ca0688d9-e20d-4adf-8c44-5e9807046154",
-      "fullName": "Winston Sawayn}",
-      "email": "Mitchell34@yahoo.com",
-      "username": "Ansley8",
-      "password": "XrEq0HgHQTvQRft"
-    },
-    {
-      "id": "68ecea8b-4d06-4f29-8b59-d3e2d7d5687f",
-      "fullName": "Obie Botsford}",
-      "email": "Cicero47@hotmail.com",
-      "username": "Theo.Satterfield",
-      "password": "iUdaj3yJSX4aUbY"
-    },
-    {
-      "id": "58375535-e2f6-4c2d-b00d-9b96d949e60d",
-      "fullName": "Dell Funk}",
-      "email": "Rogers14@gmail.com",
-      "username": "Lila.Effertz",
-      "password": "znCxdP9t1OKqY6r"
-    },
-    {
-      "id": "60bc5a47-1e28-43f4-a2d7-ea6cbe7fc11c",
-      "fullName": "Ashley Dach}",
-      "email": "Orlando_Strosin@hotmail.com",
-      "username": "Alf.Lemke",
-      "password": "Vna23SXXjyvMa5J"
-    },
-    {
-      "id": "050ca3d1-1535-45d5-a4d1-bdddeb6dc3f5",
-      "fullName": "Albina Stanton}",
-      "email": "Rosalinda57@yahoo.com",
-      "username": "Morris_Keeling64",
-      "password": "IKDIw__n3L5VGXO"
-    },
-    {
-      "id": "bd18176c-3410-4200-b092-47974cfb8b4c",
-      "fullName": "Tamia Schmitt}",
-      "email": "Micheal_Littel26@hotmail.com",
-      "username": "Logan_Kuphal",
-      "password": "XC444E7uS3Uwru0"
-    },
-    {
-      "id": "4e4a7bf0-593c-4ef7-8819-a3c676c7772e",
-      "fullName": "Etha Mertz}",
-      "email": "Erling.Homenick@yahoo.com",
-      "username": "June.Swift0",
-      "password": "pmKSWnve6YxXJ59"
-    },
-    {
-      "id": "ba572997-5911-4caf-af3c-5faae9e8f15b",
-      "fullName": "Sonny Kerluke}",
-      "email": "Judson1@hotmail.com",
-      "username": "Tito.Smith",
-      "password": "M9JiVwV0YTxB2Bo"
-    },
-    {
-      "id": "e368abbc-940b-4e30-af79-b37e3215127f",
-      "fullName": "Amari Pagac}",
-      "email": "Rosalyn_Considine@hotmail.com",
-      "username": "Blanche75",
-      "password": "WnjkhgkBpSbHPnd"
-    },
-    {
-      "id": "e0830822-992c-46ed-8ecc-96d0ce585235",
-      "fullName": "Vivien Koelpin}",
-      "email": "Cecelia.Hilpert@gmail.com",
-      "username": "Judah94",
-      "password": "THAa_gF1RsZm3cy"
-    },
-    {
-      "id": "2d83981c-f334-40ce-836c-59ca697cdbc5",
-      "fullName": "Michelle Rippin}",
-      "email": "Annetta94@yahoo.com",
-      "username": "Kacie12",
-      "password": "rXIJrnZwYxVDOks"
-    },
-    {
-      "id": "1912d471-963f-4f62-bbb7-ecdc2b7f3c5d",
-      "fullName": "Magnolia Terry}",
-      "email": "Heath.Tillman36@yahoo.com",
-      "username": "Augusta.Maggio19",
-      "password": "XdmG6nM7NCgx7p_"
-    },
-    {
-      "id": "a5a70367-7792-46b7-baa3-7b172f4e9de8",
-      "fullName": "Leanne Hessel}",
-      "email": "Vanessa.Kassulke18@yahoo.com",
-      "username": "Mercedes_Dietrich69",
-      "password": "XWegPgdE0s04W59"
-    },
-    {
-      "id": "28e847cc-da10-421b-bfb9-00f32dd730c6",
-      "fullName": "Amara Hamill}",
-      "email": "Eve.Goldner67@yahoo.com",
-      "username": "Stewart.Abernathy58",
-      "password": "NBVaEJBWwrN7Obk"
-    },
-    {
-      "id": "f14f988e-fa50-4207-a529-b4d22bba547b",
-      "fullName": "Aryanna Christiansen}",
-      "email": "John.Mayer40@hotmail.com",
-      "username": "Clint.Quigley",
-      "password": "KdVJrQrv3Eru09i"
-    },
-    {
-      "id": "6cab56a0-b09f-4af7-9680-ba108fe083db",
-      "fullName": "Murphy Cormier}",
-      "email": "Elise_Streich16@gmail.com",
-      "username": "Murray.Dibbert",
-      "password": "LZbxUcUfZavCI2X"
-    },
-    {
-      "id": "09cc68fc-0b27-4c0f-bc77-2346468a8e14",
-      "fullName": "Milan Maggio}",
-      "email": "Reagan30@hotmail.com",
-      "username": "Tamara.Grimes",
-      "password": "7WgbtXQ75S06kqb"
-    },
-    {
-      "id": "d0bb80b5-52dd-4921-a7e3-08262cdb8cc5",
-      "fullName": "Benedict Stiedemann}",
-      "email": "Lucinda_Kertzmann@gmail.com",
-      "username": "Eusebio_Toy",
-      "password": "JwArti6J7QADumf"
-    },
-    {
-      "id": "40aa2ee5-1698-4d68-8a09-bde5f485e24b",
-      "fullName": "Albina Pollich}",
-      "email": "Hope.Gleichner37@gmail.com",
-      "username": "Mason.Heidenreich",
-      "password": "wHubfW0_qsRqqaA"
-    },
-    {
-      "id": "6ecf2345-1982-4e0f-8b99-3b67c0a6205f",
-      "fullName": "Crawford Hahn}",
-      "email": "Ludie_Zboncak37@yahoo.com",
-      "username": "Abigale_Miller73",
-      "password": "0Kgfnq21ijpumcx"
-    },
-    {
-      "id": "87278c63-6166-4547-827a-73c5cb66373f",
-      "fullName": "Dwight Hegmann}",
-      "email": "Eloy.Koelpin31@yahoo.com",
-      "username": "Lillie_Lakin",
-      "password": "_42O3oOi6By6SKV"
+      "permissionXScopeId": "3",
+      "permissionId": "3",
+      "scopeId": "2"
     }
   ]
 }

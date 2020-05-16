@@ -20,9 +20,9 @@ export const resolvers = {
       }
     },
 
-    async user(_parent, { id }) {
+    async user(_parent, { userId }) {
       try {
-        return db.get("users").find({ id }).value()
+        return db.get("users").find({ userId }).value()
       } catch {
         throw new AuthenticationError(
           "Authentication token is invalid, please log in"
@@ -39,10 +39,10 @@ export const resolvers = {
       }
     },
 
-    async post(_parent, { id }, ctx) {
+    async post(_parent, { postId }, ctx) {
       try {
-        console.log("fetch post", id)
-        return db.get("posts").find({ id }).value()
+        console.log("fetch post", postId)
+        return db.get("posts").find({ postId }).value()
       } catch (error) {
         console.error(error)
       }
@@ -77,16 +77,16 @@ export const resolvers = {
 
     async createPost(_parent, args, ctx) {
       const post = {
-        id: faker.random.uuid(),
+        postId: faker.random.uuid(),
         ...args
       }
       db.get("posts").push(post).write()
       return post
     },
 
-    async updatePost(_parent, { id, ...args }, ctx) {
-      db.get("posts").find({ id }).assign(args).write()
-      return db.get("posts").find({ id }).value()
+    async updatePost(_parent, { postId, ...args }, ctx) {
+      db.get("posts").find({ postId }).assign(args).write()
+      return db.get("posts").find({ v }).value()
     }
   }
 }

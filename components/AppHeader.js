@@ -11,8 +11,8 @@ const AppHeader = () => {
         <Fragment>
           <li>{user?.fullName}</li>
           <li>
-            <Link href={"/posts/new"}>
-              <a>new post</a>
+            <Link href={"/admin"}>
+              <a>admin</a>
             </Link>
           </li>
           <li>

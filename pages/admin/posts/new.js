@@ -2,12 +2,12 @@ import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import React from "react"
 import { useForm } from "react-hook-form"
-import usePrivateRoute from "../../lib/hooks/auth/usePrivateRoute"
+import usePrivateRoute from "../../../lib/hooks/auth/usePrivateRoute"
 
 const createPostMutation = gql`
   mutation createPost($title: String!, $body: String) {
     createPost(title: $title, body: $body) {
-      id
+      postId
       title
       body
     }

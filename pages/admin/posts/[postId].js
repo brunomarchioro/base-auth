@@ -3,9 +3,9 @@ import gql from "graphql-tag"
 import { useRouter } from 'next/router'
 
 const postQuery = gql`
-  query post($id: ID!) {
-    post(id: $id) {
-      id
+  query post($postId: ID!) {
+    post(postId: $postId) {
+      postId
       title
       body
     }
@@ -14,10 +14,10 @@ const postQuery = gql`
 
 function PostShowPage() {
   const router = useRouter()
-  const { id } = router.query
+  const { postId } = router.query
   const { loading, data } = useQuery(postQuery, {
-    variables: { id },
-    skip: !id
+    variables: { postId },
+    skip: !postId
   });
 
   if (loading) return 'Loading...';
