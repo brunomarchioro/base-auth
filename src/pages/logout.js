@@ -10,7 +10,7 @@ const LogoutMutation = gql`
   }
 `
 
-function Logout() {
+const Logout = () => {
   const client = useApolloClient()
   const router = useRouter()
   const [logout] = useMutation(LogoutMutation)

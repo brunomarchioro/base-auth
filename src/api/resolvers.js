@@ -9,10 +9,9 @@ const db = low(adapter)
 
 export const resolvers = {
   Query: {
-    async authenticatedUser(_parent, _args, ctx) {
+    async authenticatedUser(_parent, _args, { user }) {
       try {
-        const { username } = getAuthToken(ctx)
-        return db.get("users").find({ username }).value()
+        return db.get("users").find({ username: user.username }).value()
       } catch {
         throw new AuthenticationError(
           "Authentication token is invalid, please log in"

@@ -2,7 +2,7 @@ import cookie from "cookie"
 import jwt from "jsonwebtoken"
 import getConfig from "next/config"
 
-const JWT_SECRET = getConfig().serverRuntimeConfig.JWT_SECRET
+const JWT_SECRET = getConfig()?.serverRuntimeConfig?.JWT_SECRET
 
 export function getAuthToken(ctx) {
   const { token } = cookie.parse(ctx.req.headers.cookie ?? "")

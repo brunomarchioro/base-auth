@@ -2,29 +2,28 @@ import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import React from "react"
 import { useForm } from "react-hook-form"
-import usePrivateRoute from "../../../lib/hooks/auth/usePrivateRoute"
+import { useRouter } from 'next/router'
 
 const createPostMutation = gql`
   mutation createPost($title: String!, $body: String) {
     createPost(title: $title, body: $body) {
       postId
-      title
-      body
     }
   }
 `
 
-function PostListPage() {
-  usePrivateRoute()
+const AdminPostsNewPage = () => {
+  const router = useRouter()
   const [createPost, { error: submitError }] = useMutation(createPostMutation);
 
   const { register, errors, ...methods } = useForm()
 
   const handleSubmit = async (values) => {
     try {
-      await createPost({
+      const { data } = await createPost({
         variables: values
       })
+      router.push('/admin/posts/[postId]', `/admin/posts/${data.createPost.postId}`)
     } catch (e) {
       console.log(e)
     }
@@ -54,7 +53,7 @@ function PostListPage() {
         <div>
           <label htmlFor="body">body</label>
           <textarea
-            name="password"
+            name="body"
             ref={register}
           />
           {errors.body && (
@@ -68,4 +67,4 @@ function PostListPage() {
   )
 }
 
-export default PostListPage
+export default AdminPostsNewPage

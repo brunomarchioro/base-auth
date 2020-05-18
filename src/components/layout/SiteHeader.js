@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { Fragment } from "react"
-import { useAuth } from "../lib/contexts/AuthContext"
+import { useAuth } from "../../lib/contexts/AuthContext"
 
-const AppHeader = () => {
+const SiteHeader = () => {
   const { isAuthenticated, user } = useAuth()
 
   return (
@@ -44,4 +44,4 @@ const AppHeader = () => {
   )
 }
 
-export default AppHeader
+export default SiteHeader

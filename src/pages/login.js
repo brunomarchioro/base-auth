@@ -14,7 +14,7 @@ const loginMutation = gql`
   }
 `
 
-function Login() {
+const Login = () => {
   const client = useApolloClient()
   const router = useRouter()
   const [login, { error: submitError }] = useMutation(loginMutation)
@@ -32,7 +32,7 @@ function Login() {
       })
       if (data.login) {
         saveAuthData(data.login)
-        await router.push(redirect || '/')
+        await router.push(redirect || '/admin')
       }
     } catch (e) {
       console.log(e)

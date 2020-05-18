@@ -12,18 +12,25 @@ const postsQuery = gql`
   }
 `
 
-function PostListPage() {
+const AdminPostsListPage = () => {
   const { loading, data } = useQuery(postsQuery);
 
   if (loading) return 'Loading...';
 
   return (
     <div>
-      <h1>Post (client)</h1>
+      <h1>Post</h1>
+      <ul>
+        <li>
+          <Link href={"/admin/posts/new"}>
+            <a>new post</a>
+          </Link>
+        </li>
+      </ul>
       <ul>
         {data?.posts.map(post => (
           <li key={post.postId}>
-            <Link href={"/posts/[postId]"} as={`/posts/${post.postId}`}>
+            <Link href={"/admin/posts/[postId]"} as={`/admin/posts/${post.postId}`}>
               <a>{post.title}</a>
             </Link>
           </li>
@@ -33,4 +40,4 @@ function PostListPage() {
   )
 }
 
-export default PostListPage
+export default AdminPostsListPage

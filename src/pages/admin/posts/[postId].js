@@ -12,7 +12,7 @@ const postQuery = gql`
   }
 `
 
-function PostShowPage() {
+const AdminPostsShowPage = () => {
   const router = useRouter()
   const { postId } = router.query
   const { loading, data } = useQuery(postQuery, {
@@ -24,11 +24,11 @@ function PostShowPage() {
 
   return (
     <div>
-      <h1>Post (client)</h1>
+      <h1>Post</h1>
       <h2>{data?.post?.title}</h2>
       <p>{data?.post?.body}</p>
     </div>
   )
 }
 
-export default PostShowPage
+export default AdminPostsShowPage
