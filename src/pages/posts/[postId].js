@@ -21,7 +21,7 @@ const PostShowPage = ({ post }) => (
 
 export async function getStaticProps(ctx) {
   const { postId } = ctx.params
-  const apolloClient = initApolloSchemaClient(ctx)
+  const apolloClient = await initApolloSchemaClient()
 
   const { data } = await apolloClient.query({
     query: postQuery,

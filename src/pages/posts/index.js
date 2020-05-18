@@ -5,6 +5,10 @@ import initApolloSchemaClient from "../../api/schemaClient"
 
 const postsQuery = gql`
   {
+    authenticatedUser {
+      fullName
+      email
+    }
     posts {
       postId
       title
@@ -27,12 +31,14 @@ const PostListPage = ({ posts }) => (
   </div>
 )
 
-export async function getStaticProps(ctx) {
-  const apolloClient = initApolloSchemaClient(ctx)
+export async function getStaticProps() {
+  const apolloClient = await initApolloSchemaClient()
 
   const { data } = await apolloClient.query({
     query: postsQuery
   })
+
+  console.log(data)
 
   return {
     unstable_revalidate: 1,

@@ -1,7 +1,6 @@
 import { AuthenticationError, UserInputError } from "apollo-server-micro"
 import low from "lowdb"
 import FileSync from "lowdb/adapters/FileSync"
-import { getAuthToken, removeAuthToken, setAuthToken } from "../lib/auth"
 import faker from "faker"
 
 const adapter = new FileSync("data/db.json")
@@ -9,8 +8,10 @@ const db = low(adapter)
 
 export const resolvers = {
   Query: {
-    async authenticatedUser(_parent, _args, { user }) {
+    async authenticatedUser(_parent, _args, { auth }) {
       try {
+        const user = auth?.user
+        if (!user) return null
         return db.get("users").find({ username: user.username }).value()
       } catch {
         throw new AuthenticationError(
@@ -58,19 +59,25 @@ export const resolvers = {
 
   },
   Mutation: {
-    async login(_parent, { username, password }, ctx) {
+    async login(_parent, { username, password }, { auth }) {
+
+      console.log(auth)
+
       let user = db.get("users").find({ username }).value()
 
       if (password === user.password) {
-        setAuthToken(ctx, username)
+        // session.set("user", user)
+        // await session.save()
+
+        await auth.set(user)
         return user
       }
 
       throw new UserInputError("Invalid email and password combination")
     },
 
-    async logout(_parent, _args, ctx) {
-      removeAuthToken(ctx)
+    async logout(_parent, _args, { auth }) {
+      auth.destroy()
       return true
     },
 

@@ -25,7 +25,7 @@ export const typeDefs = gql`
   }
 
   type Query {
-    authenticatedUser: AuthenticatedUser!
+    authenticatedUser: AuthenticatedUser
     
     user: User!
     users: [User]
@@ -35,7 +35,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    login(username: String!, password: String!): AuthenticatedUser!
+    login(username: String!, password: String!): AuthenticatedUser
     logout: Boolean!
     
     createPost(title: String!, body: String): Post!

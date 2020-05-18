@@ -3,6 +3,7 @@ import gql from "graphql-tag"
 import React from "react"
 import { useForm } from "react-hook-form"
 import { useRouter } from 'next/router'
+import PostForm from "../../../components/posts/PostForm"
 
 const createPostMutation = gql`
   mutation createPost($title: String!, $body: String) {
@@ -33,36 +34,11 @@ const AdminPostsNewPage = () => {
     <div>
       <h1>new post</h1>
 
-      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+      {submitError && (
+        <p>save error!</p>
+      )}
 
-        {submitError && (
-          <p>save error!</p>
-        )}
-
-        <div>
-          <label htmlFor="title">title</label>
-          <input
-            name="title"
-            ref={register({ required: true })}
-          />
-          {errors.title && (
-            <p>{errors.title.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="body">body</label>
-          <textarea
-            name="body"
-            ref={register}
-          />
-          {errors.body && (
-            <p>{errors.body.message}</p>
-          )}
-        </div>
-
-        <button type="submit">send</button>
-      </form>
+      <PostForm handleSubmit={handleSubmit} />
     </div>
   )
 }
