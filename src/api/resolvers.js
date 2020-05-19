@@ -1,4 +1,5 @@
 import { AuthenticationError, UserInputError } from "apollo-server-micro"
+import { separateOperations } from "graphql"
 import low from "lowdb"
 import FileSync from "lowdb/adapters/FileSync"
 import faker from "faker"
@@ -10,9 +11,8 @@ export const resolvers = {
   Query: {
     async authenticatedUser(_parent, _args, { auth }) {
       try {
-        const user = auth?.user
-        if (!user) return null
-        return db.get("users").find({ username: user.username }).value()
+        if (!auth?.user) return null
+        return db.get("users").find({ username: auth.user.username }).value()
       } catch {
         throw new AuthenticationError(
           "Authentication token is invalid, please log in"
@@ -48,27 +48,42 @@ export const resolvers = {
       }
     },
 
-    async posts(_parent, _args, ctx, _info) {
+    async posts(_parent, { scopeCodename }, ctx, _info) {
       try {
         console.log("fetch post list")
-        return db.get("posts").value()
+        const posts = db.get("posts")
+        if (scopeCodename) {
+          posts.find({  })
+        }
+        return
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
+    async scope(_parent, { codename }, ctx) {
+      try {
+        console.log("fetch scope", codename)
+        return db.get("scopes").find({ codename }).value()
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
+    async scopes(_parent, _args, ctx, _info) {
+      try {
+        console.log("fetch scope list")
+        return db.get("scopes").value()
       } catch (error) {
         console.error(error)
       }
     }
-
   },
   Mutation: {
     async login(_parent, { username, password }, { auth }) {
-
-      console.log(auth)
-
       let user = db.get("users").find({ username }).value()
 
       if (password === user.password) {
-        // session.set("user", user)
-        // await session.save()
-
         await auth.set(user)
         return user
       }
@@ -92,7 +107,7 @@ export const resolvers = {
 
     async updatePost(_parent, { postId, ...args }, ctx) {
       db.get("posts").find({ postId }).assign(args).write()
-      return db.get("posts").find({ v }).value()
+      return db.get("posts").find({ postId }).value()
     }
   }
 }

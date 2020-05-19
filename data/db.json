@@ -2,15 +2,18 @@
   "scopes": [
     {
       "scopeId": "1",
+      "codename": "main",
       "name": "main"
     },
     {
       "scopeId": "2",
-      "name": "reitoria"
+      "codename": "reitoria",
+      "name": "Reitoria"
     },
     {
       "scopeId": "3",
-      "name": "erechim"
+      "codename": "erechim",
+      "name": "Campus Erechim"
     }
   ],
   "contentTypes": [
@@ -49,7 +52,8 @@
     },
     {
       "postId": "251cc07c-b517-4e87-abf1-1c6640c1a00c",
-      "title": "tttt"
+      "title": "123654",
+      "body": "hhhh"
     },
     {
       "postId": "5520569b-c509-4b71-85ae-3738752d93af",
@@ -63,7 +67,7 @@
     },
     {
       "postId": "6908cbab-1620-4217-a266-6e0911e5b50b",
-      "title": "aaaa",
+      "title": "tyutyutyu",
       "body": "bbbb"
     },
     {

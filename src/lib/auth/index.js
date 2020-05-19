@@ -3,10 +3,10 @@ import { applySession } from "next-iron-session"
 const getAuth = async ({ req, res }) => {
   const options = {
     password: process.env.SECRET_COOKIE_PASSWORD,
-    cookieName: 'base-auth/session',
+    cookieName: "base-auth/session",
     cookieOptions: {
-      secure: process.env.NODE_ENV === 'production' ? true : false,
-    },
+      secure: process.env.NODE_ENV === "production" ? true : false
+    }
   }
 
   await applySession(req, res, options)

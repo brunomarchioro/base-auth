@@ -5,10 +5,6 @@ import initApolloSchemaClient from "../../api/schemaClient"
 
 const postsQuery = gql`
   {
-    authenticatedUser {
-      fullName
-      email
-    }
     posts {
       postId
       title
@@ -37,8 +33,6 @@ export async function getStaticProps() {
   const { data } = await apolloClient.query({
     query: postsQuery
   })
-
-  console.log(data)
 
   return {
     unstable_revalidate: 1,

@@ -18,6 +18,12 @@ export const typeDefs = gql`
     title: String
     body: String
   }
+  
+  type Scope {
+    scopeId: ID!
+    codename: String!
+    name: String!
+  }
 
   input LoginInput {
     email: String!
@@ -31,7 +37,10 @@ export const typeDefs = gql`
     users: [User]
     
     post(postId: ID!): Post!
-    posts: [Post]
+    posts(scopeCodename: String): [Post]
+
+    scope(codename: String!): Scope!
+    scopes: [Scope]
   }
 
   type Mutation {
