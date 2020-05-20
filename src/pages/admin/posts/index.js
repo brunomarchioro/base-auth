@@ -6,7 +6,7 @@ import React from "react"
 const postsQuery = gql`
   {
     posts {
-      postId
+      id
       title
     }
   }
@@ -29,8 +29,8 @@ const AdminPostsListPage = () => {
       </ul>
       <ul>
         {data?.posts.map(post => (
-          <li key={post.postId}>
-            <Link href={"/admin/posts/[postId]"} as={`/admin/posts/${post.postId}`}>
+          <li key={post.id}>
+            <Link href={"/admin/posts/[id]"} as={`/admin/posts/${post.id}`}>
               <a>{post.title}</a>
             </Link>
           </li>

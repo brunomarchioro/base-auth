@@ -6,8 +6,7 @@ import SiteMenu from "./SiteMenu"
 const SiteLayout = ({ children }) => (
   <Fragment>
     <Head>
-      <title>base-auth</title>
-      <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+      <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_mischka.min.css"/>
     </Head>
 
     <SiteHeader/>

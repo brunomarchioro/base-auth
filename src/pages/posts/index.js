@@ -6,7 +6,7 @@ import initApolloSchemaClient from "../../api/schemaClient"
 const postsQuery = gql`
   {
     posts {
-      postId
+      id
       title
     }
   }
@@ -17,8 +17,8 @@ const PostListPage = ({ posts }) => (
     <h1>Post list</h1>
     <ul>
       {posts.map(post => (
-        <li key={post.postId}>
-          <Link href={"/posts/[postId]"} as={`/posts/${post.postId}`}>
+        <li key={post.id}>
+          <Link href={"/posts/[id]"} as={`/posts/${post.id}`}>
             <a>{post.title}</a>
           </Link>
         </li>

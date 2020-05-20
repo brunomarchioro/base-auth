@@ -1,15 +1,36 @@
 import { ApolloServer } from "apollo-server-micro"
-// import { withIronSession } from "next-iron-session"
+import { open } from "sqlite"
+import sqlite3 from "sqlite3"
 import getAuth from "../lib/auth"
-import schema from './schema'
+import { makeExecutableSchema } from "apollo-server-micro"
+import { resolvers } from "./resolvers"
+import { typeDefs } from "./type-defs"
+
+const openDb = () => open({
+  filename: 'data/dev.db',
+  driver: sqlite3.Database
+})
+
+export const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+})
+
+export const getContext = async (ctx) => {
+  const db = await openDb()
+  let auth = { user: null }
+
+  if (ctx?.req) {
+    auth = await getAuth(ctx)
+  }
+
+  console.log('logged user', auth?.user)
+  return { auth, db }
+}
 
 let config = {
   schema,
-  context: async (ctx) => {
-    const auth = await getAuth(ctx)
-    console.log('logged user', auth?.user)
-    return { auth }
-  }
+  context: getContext
 }
 
 if (process.env.NODE_ENV === "production") {

@@ -10,6 +10,12 @@ const loginMutation = gql`
     login(username: $username, password: $password) {
       fullName
       email
+      groups
+      permissions {
+        scope
+        contentType
+        roles
+      }
     }
   }
 `
@@ -52,6 +58,7 @@ const Login = () => {
           <label htmlFor="username">username</label>
           <input
             name="username"
+            type="text"
             ref={register({ required: true })}
           />
           {errors.username && (

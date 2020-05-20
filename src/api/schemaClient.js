@@ -1,19 +1,14 @@
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { ApolloClient } from "apollo-client"
 import { SchemaLink } from "apollo-link-schema"
-import getAuth from "../lib/auth"
-import schema from "./schema"
+import { schema, getContext } from "./"
 
 const initApolloSchemaClient = async (ctx) => {
-  let auth = { user: null }
-
-  if (ctx?.req) {
-    auth = await getAuth(ctx)
-  }
+  const context = await getContext(ctx)
 
   return new ApolloClient({
     ssrMode: true,
-    link: new SchemaLink({ schema, context: { auth } }),
+    link: new SchemaLink({ schema, context }),
     cache: new InMemoryCache()
   })
 }

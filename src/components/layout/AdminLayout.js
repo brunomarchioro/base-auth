@@ -11,8 +11,7 @@ const AdminLayout = ({ children }) => {
   return (
     <Fragment>
       <Head>
-        <title>base-auth</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_big-stone.min.css"/>
       </Head>
 
       <AdminHeader/>

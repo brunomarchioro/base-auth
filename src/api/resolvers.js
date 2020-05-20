@@ -1,18 +1,62 @@
 import { AuthenticationError, UserInputError } from "apollo-server-micro"
-import { separateOperations } from "graphql"
-import low from "lowdb"
-import FileSync from "lowdb/adapters/FileSync"
-import faker from "faker"
-
-const adapter = new FileSync("data/db.json")
-const db = low(adapter)
+import SQL from "sql-template-strings"
 
 export const resolvers = {
+  AuthenticatedUser: {
+    fullName: ({ firstName, lastName }) => `${firstName} ${lastName}`,
+    async groups({ id }, _args, { db }) {
+      const groups = await db.all(SQL`
+          SELECT
+              name
+          FROM groups
+              LEFT JOIN users_x_groups on groups.id = users_x_groups.groupId
+          WHERE
+              users_x_groups.userId = ${id}
+      `)
+      return groups.map(group => group.name)
+    },
+    async permissions({ id }, _args, { db }) {
+      return db.all(SQL`
+        SELECT
+            scopes.codename AS scope,
+            content_types.codename AS contentType,
+            roles
+        FROM permissions
+            LEFT JOIN groups on permissions.groupId = groups.id
+            LEFT JOIN users_x_groups on groups.id = users_x_groups.groupId
+            LEFT JOIN scopes on permissions.scopeId = scopes.id
+            LEFT JOIN content_types on permissions.contentTypeId = content_types.id
+        WHERE
+            users_x_groups.userId = ${id}
+      `)
+    },
+  },
+
   Query: {
-    async authenticatedUser(_parent, _args, { auth }) {
+    async authenticatedUser(_parent, _args, { auth, db }) {
       try {
         if (!auth?.user) return null
-        return db.get("users").find({ username: auth.user.username }).value()
+
+        console.log(auth.user)
+
+        const user = await db.get(SQL`
+            SELECT * FROM users WHERE uuid = ${auth.user.uuid}
+        `)
+
+        console.log(user)
+
+        return user
+      } catch (e) {
+        console.log(e)
+        throw new AuthenticationError(
+          "Authentication token is invalid, please log in"
+        )
+      }
+    },
+
+    async user(_parent, { id }, { db }) {
+      try {
+        return db.get(SQL`SELECT * FROM users WHERE id = ${id}`)
       } catch {
         throw new AuthenticationError(
           "Authentication token is invalid, please log in"
@@ -20,71 +64,66 @@ export const resolvers = {
       }
     },
 
-    async user(_parent, { userId }) {
+    async users(_parent, _args, { db }) {
       try {
-        return db.get("users").find({ userId }).value()
-      } catch {
-        throw new AuthenticationError(
-          "Authentication token is invalid, please log in"
-        )
-      }
-    },
-
-    async users() {
-      try {
-        console.log("fetch post list")
-        return db.get("users").value()
+        console.log("fetch users list")
+        return db.all(SQL`SELECT * FROM users`)
       } catch (error) {
         console.error(error)
       }
     },
 
-    async post(_parent, { postId }, ctx) {
+    async post(_parent, { id }, { db }) {
       try {
-        console.log("fetch post", postId)
-        return db.get("posts").find({ postId }).value()
+        console.log("fetch post", id)
+        return db.get(SQL`SELECT * FROM posts WHERE id = ${id}`)
       } catch (error) {
         console.error(error)
       }
     },
 
-    async posts(_parent, { scopeCodename }, ctx, _info) {
+    async posts(_parent, { scopeCodename }, { db }) {
       try {
         console.log("fetch post list")
-        const posts = db.get("posts")
+        const query = SQL`SELECT * FROM posts`
         if (scopeCodename) {
-          posts.find({  })
+          query.append(SQL`
+            LEFT JOIN posts_x_scopes on posts.id = posts_x_scopes.postId
+            LEFT JOIN scopes on posts_x_scopes.scopeId = scopes.id
+            WHERE
+            scopes.codename = ${scopeCodename}
+          `)
         }
-        return
+        return db.all(query)
       } catch (error) {
         console.error(error)
       }
     },
 
-    async scope(_parent, { codename }, ctx) {
+    async scope(_parent, { codename }, { db }) {
       try {
         console.log("fetch scope", codename)
-        return db.get("scopes").find({ codename }).value()
+        return db.get(SQL`SELECT * FROM scopes WHERE codename = ${codename}`)
       } catch (error) {
         console.error(error)
       }
     },
 
-    async scopes(_parent, _args, ctx, _info) {
+    async scopes(_parent, _args, { db }) {
       try {
         console.log("fetch scope list")
-        return db.get("scopes").value()
+        return db.all(SQL`SELECT * FROM scopes`)
       } catch (error) {
         console.error(error)
       }
     }
   },
   Mutation: {
-    async login(_parent, { username, password }, { auth }) {
-      let user = db.get("users").find({ username }).value()
+    async login(_parent, { username, password }, { auth, db }) {
+      const user = await db.get(SQL`SELECT * FROM users WHERE uuid = ${username}`)
 
       if (password === user.password) {
-        await auth.set(user)
+        await auth.set({ uuid: user.uuid })
         return user
       }
 
@@ -96,18 +135,27 @@ export const resolvers = {
       return true
     },
 
-    async createPost(_parent, args, ctx) {
-      const post = {
-        postId: faker.random.uuid(),
-        ...args
-      }
-      db.get("posts").push(post).write()
-      return post
+    async createPost(_parent, args, { db }) {
+      const result = await db.run(`
+        INSERT INTO posts
+            (title, content)
+        VALUES 
+            (${args.title}, ${args.content})
+      `)
+
+      return db.get(SQL`SELECT * FROM posts WHERE id = ${result.lastID}`)
     },
 
-    async updatePost(_parent, { postId, ...args }, ctx) {
-      db.get("posts").find({ postId }).assign(args).write()
-      return db.get("posts").find({ postId }).value()
+    async updatePost(_parent, { id, ...args }, { db }) {
+      await db.run(`
+        UPDATE posts SET
+            title = ${args.title},
+            content = ${args.content}
+        WHERE
+            id = ${id}
+      `)
+
+      return db.get(SQL`SELECT * FROM posts WHERE id = ${id}`)
     }
   }
 }

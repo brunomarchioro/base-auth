@@ -5,7 +5,7 @@ const AdminHeader = () => {
   const { user } = useAuth()
 
   return (
-    <div className="header">
+    <div>
       <p>
         Área administrativa
       </p>
@@ -31,11 +31,6 @@ const AdminHeader = () => {
 
       {/*language=CSS*/}
       <style jsx>{`
-        .header {
-          background-color: red;
-          padding: 5px 10px;
-        }
-
         ul {
           display: flex;
           list-style: none;

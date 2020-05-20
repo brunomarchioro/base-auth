@@ -5,30 +5,30 @@ import React from "react"
 import PostForm from "../../../components/posts/PostForm"
 
 const postQuery = gql`
-  query post($postId: ID!) {
-    post(postId: $postId) {
-      postId
+  query post($id: Int!) {
+    post(id: $id) {
+      id
       title
-      body
+      content
     }
   }
 `
 
 const updatePostMutation = gql`
-  mutation updatePost($postId: ID!, $title: String!, $body: String) {
-    updatePost(postId: $postId, title: $title, body: $body) {
-      postId
+  mutation updatePost($id: Int!, $title: String!, $content: String) {
+    updatePost(id: $id, title: $title, content: $content) {
+      id
     }
   }
 `
 
 const AdminPostsShowPage = () => {
   const router = useRouter()
-  const { postId } = router.query
+  const { id } = router.query
 
   const { loading, data } = useQuery(postQuery, {
-    variables: { postId },
-    skip: !postId
+    variables: { id: parseInt(id, 10) },
+    skip: !id
   })
 
   const [updatePost, { error: submitError }] = useMutation(updatePostMutation)
@@ -37,7 +37,7 @@ const AdminPostsShowPage = () => {
     try {
       const { data } = await updatePost({
         variables: {
-          postId,
+          id: parseInt(id, 10),
           ...values
         }
       })

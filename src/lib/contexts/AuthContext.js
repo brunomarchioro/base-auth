@@ -13,6 +13,12 @@ const authenticatedUserQuery = gql`
     authenticatedUser {
       fullName
       email
+      groups
+      permissions {
+        scope
+        contentType
+        roles
+      }
     }
   }
 `
@@ -28,7 +34,10 @@ function AuthProvider(props) {
         const { data } = await client.query({ query: authenticatedUserQuery })
         console.log('fetchAuthData', data)
         if (data.authenticatedUser) {
+          console.log('setAuthData', data.authenticatedUser)
           setAuthData(authenticatedData(data.authenticatedUser))
+        } else {
+          setAuthData(unauthenticatedData)
         }
       } catch (e) {
         console.log('Error fetching auth data')

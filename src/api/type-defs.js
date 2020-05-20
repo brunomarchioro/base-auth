@@ -1,26 +1,34 @@
 import gql from 'graphql-tag'
 
 export const typeDefs = gql`
+  type UserPermission {
+    scope: String
+    contentType: String
+    roles: String
+  }
+  
   type AuthenticatedUser {
     fullName: String!
     email: String!
+    groups: [String]
+    permissions: [UserPermission]
   }
   
   type User {
-    userId: ID!
+    id: Int!
     fullName: String!
     email: String!
     username: String!
   }
   
   type Post {
-    postId: ID!
+    id: Int!
     title: String
-    body: String
+    content: String
   }
   
   type Scope {
-    scopeId: ID!
+    id: Int!
     codename: String!
     name: String!
   }
@@ -36,7 +44,7 @@ export const typeDefs = gql`
     user: User!
     users: [User]
     
-    post(postId: ID!): Post!
+    post(id: Int!): Post!
     posts(scopeCodename: String): [Post]
 
     scope(codename: String!): Scope!
@@ -47,7 +55,7 @@ export const typeDefs = gql`
     login(username: String!, password: String!): AuthenticatedUser
     logout: Boolean!
     
-    createPost(title: String!, body: String): Post!
-    updatePost(postId: ID!, title: String, body: String): Post!
+    createPost(title: String!, content: String): Post!
+    updatePost(id: Int!, title: String, content: String): Post!
   }
 `

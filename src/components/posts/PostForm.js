@@ -10,6 +10,7 @@ const PostForm = ({ defaultValues, handleSubmit }) => {
         <label htmlFor="title">title</label>
         <input
           name="title"
+          type="text"
           ref={register({ required: true })}
         />
         {errors.title && (
@@ -18,13 +19,13 @@ const PostForm = ({ defaultValues, handleSubmit }) => {
       </div>
 
       <div>
-        <label htmlFor="body">body</label>
+        <label htmlFor="content">content</label>
         <textarea
-          name="body"
+          name="content"
           ref={register}
         />
-        {errors.body && (
-          <p>{errors.body.message}</p>
+        {errors.content && (
+          <p>{errors.content.message}</p>
         )}
       </div>
 
