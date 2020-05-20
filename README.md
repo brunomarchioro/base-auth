@@ -1,4 +1,4 @@
-# Autenticação com Next.js e Apollo
+# Autenticação com Next.js e Apollo GraphQL
 
 Exemplo de aplicação Next.js usando Apollo GraphQL client e server.
 
