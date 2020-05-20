@@ -136,7 +136,7 @@ export const resolvers = {
     },
 
     async createPost(_parent, args, { db }) {
-      const result = await db.run(`
+      const result = await db.run(SQL`
         INSERT INTO posts
             (title, content)
         VALUES 
@@ -147,7 +147,7 @@ export const resolvers = {
     },
 
     async updatePost(_parent, { id, ...args }, { db }) {
-      await db.run(`
+      await db.run(SQL`
         UPDATE posts SET
             title = ${args.title},
             content = ${args.content}
