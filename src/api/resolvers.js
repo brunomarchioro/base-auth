@@ -1,5 +1,6 @@
 import { AuthenticationError, UserInputError } from "apollo-server-micro"
 import SQL from "sql-template-strings"
+import { getPrivatePosts } from "./models/posts"
 
 export const resolvers = {
   AuthenticatedUser: {
@@ -39,13 +40,14 @@ export const resolvers = {
 
         console.log(auth.user)
 
-        const user = await db.get(SQL`
-            SELECT * FROM users WHERE uuid = ${auth.user.uuid}
-        `)
+        // const user = await db.get(SQL`
+        //     SELECT * FROM users WHERE uuid = ${auth.user.uuid}
+        // `)
+        //
+        // console.log(user)
 
-        console.log(user)
-
-        return user
+        // return user
+        return auth.user
       } catch (e) {
         console.log(e)
         throw new AuthenticationError(
@@ -82,19 +84,24 @@ export const resolvers = {
       }
     },
 
-    async posts(_parent, { scopeCodename }, { db }) {
+    async posts(_parent, { scopeCodename }, { auth, db }) {
       try {
         console.log("fetch post list")
-        const query = SQL`SELECT * FROM posts`
-        if (scopeCodename) {
-          query.append(SQL`
+
+        if (auth?.user) {
+          return getPrivatePosts({ auth }, db)
+        } else {
+          const query = SQL`SELECT * FROM posts`
+          if (scopeCodename) {
+            query.append(SQL`
             LEFT JOIN posts_x_scopes on posts.id = posts_x_scopes.postId
             LEFT JOIN scopes on posts_x_scopes.scopeId = scopes.id
             WHERE
             scopes.codename = ${scopeCodename}
           `)
+          }
+          return db.all(query)
         }
-        return db.all(query)
       } catch (error) {
         console.error(error)
       }
@@ -120,10 +127,23 @@ export const resolvers = {
   },
   Mutation: {
     async login(_parent, { username, password }, { auth, db }) {
-      const user = await db.get(SQL`SELECT * FROM users WHERE uuid = ${username}`)
+      const { password: userPassword, ...user } = await db.get(SQL`SELECT * FROM users WHERE uuid = ${username}`)
 
-      if (password === user.password) {
-        await auth.set({ uuid: user.uuid })
+      if (password === userPassword) {
+        const permissions = await db.all(SQL`
+          SELECT
+              scopes.codename AS scope,
+              content_types.codename AS contentType,
+              roles
+          FROM permissions
+              LEFT JOIN groups on permissions.groupId = groups.id
+              LEFT JOIN users_x_groups on groups.id = users_x_groups.groupId
+              LEFT JOIN scopes on permissions.scopeId = scopes.id
+              LEFT JOIN content_types on permissions.contentTypeId = content_types.id
+          WHERE
+              users_x_groups.userId = ${user.id}
+        `)
+        await auth.set({ ...user, permissions })
         return user
       }
 
