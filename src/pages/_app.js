@@ -1,3 +1,4 @@
+import "../styles/index.css"
 import { ApolloProvider } from "@apollo/react-common"
 import { useRouter } from "next/router"
 import React, { Fragment } from "react"
@@ -15,7 +16,7 @@ function App({ Component, pageProps }) {
   return (
     <Fragment>
       <Head>
-        <title>Base app</title>
+        <title>base-app</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 

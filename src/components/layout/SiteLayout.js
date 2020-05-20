@@ -1,7 +1,6 @@
 import React, { Fragment } from "react"
-import Head from 'next/head'
+import Head from "next/head"
 import SiteHeader from "./SiteHeader"
-import SiteMenu from "./SiteMenu"
 
 const SiteLayout = ({ children }) => (
   <Fragment>
@@ -10,9 +9,10 @@ const SiteLayout = ({ children }) => (
     </Head>
 
     <SiteHeader/>
-    <SiteMenu/>
 
-    {children}
+    <main>
+      {children}
+    </main>
   </Fragment>
 )
 

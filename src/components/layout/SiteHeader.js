@@ -6,41 +6,50 @@ const SiteHeader = () => {
   const { isAuthenticated, user } = useAuth()
 
   return (
-    <ul className="app-header">
-      {isAuthenticated ? (
-        <Fragment>
-          <li>{user?.fullName}</li>
+    <header>
+      <h1>base-app</h1>
+      <nav>
+        <ul>
           <li>
-            <Link href={"/admin"}>
-              <a>admin</a>
+            <Link href="/">
+              <a>home</a>
             </Link>
           </li>
           <li>
-            <Link href={"/logout"}>
-              <a>logout</a>
+            <Link href={"/posts"}>
+              <a>posts</a>
             </Link>
           </li>
-        </Fragment>
-      ) : (
-        <li>
-          <Link href={"/login"}>
-            <a>login</a>
-          </Link>
-        </li>
-      )}
+          <li>
+            <Link href={"/erechim"}>
+              <a>Campus Erechim</a>
+            </Link>
+          </li>
 
-      {/*language=CSS*/}
-      <style jsx>{`
-        .app-header {
-          display: flex;
-          list-style: none;
-        }
-
-        .app-header li {
-          margin-right: 8px;
-        }
-      `}</style>
-    </ul>
+          {isAuthenticated ? (
+            <Fragment>
+              <li>{user?.fullName}</li>
+              <li>
+                <Link href={"/admin"}>
+                  <a>admin</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={"/logout"}>
+                  <a>logout</a>
+                </Link>
+              </li>
+            </Fragment>
+          ) : (
+            <li>
+              <Link href={"/login"}>
+                <a>login</a>
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </header>
   )
 }
 

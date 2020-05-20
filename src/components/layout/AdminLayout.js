@@ -16,7 +16,9 @@ const AdminLayout = ({ children }) => {
 
       <AdminHeader/>
 
-      {children}
+      <main>
+        {children}
+      </main>
     </Fragment>
   )
 }

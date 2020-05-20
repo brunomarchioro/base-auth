@@ -1,0 +1,21 @@
+#__next > header {
+  margin-bottom: 3.5em;
+}
+
+#__next > header h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+#__next > header p {
+  margin: 0;
+  font-size: 0.85em;
+}
+
+#__next > footer {
+  margin-top: 6em;
+  padding-bottom: 1.5em;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaaaaa;
+}
