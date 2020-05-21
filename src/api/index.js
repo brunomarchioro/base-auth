@@ -3,8 +3,10 @@ import { open } from "sqlite"
 import sqlite3 from "sqlite3"
 import getAuth from "../lib/auth"
 import { makeExecutableSchema } from "apollo-server-micro"
-import { resolvers } from "./resolvers"
-import { typeDefs } from "./type-defs"
+import resolvers from "./resolvers"
+import { fileLoader, mergeTypes } from 'merge-graphql-schemas'
+
+const typeDefs = mergeTypes(fileLoader('src/api/types'), { all: true });
 
 const openDb = () => open({
   filename: 'data/dev.db',
@@ -43,11 +45,3 @@ if (process.env.NODE_ENV === "production") {
 const apolloServer = new ApolloServer(config)
 
 export default apolloServer.createHandler({ path: "/api/graphql" })
-
-// export default withIronSession(apolloServer.createHandler({ path: "/api/graphql" }), {
-//   password: process.env.SECRET_COOKIE_PASSWORD,
-//   cookieName: 'base-auth/session',
-//   cookieOptions: {
-//     secure: process.env.NODE_ENV === 'production' ? true : false,
-//   },
-// })

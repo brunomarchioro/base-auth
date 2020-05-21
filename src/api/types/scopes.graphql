@@ -1,0 +1,13 @@
+type Scope {
+  id: Int!
+  codename: String!
+  name: String!
+
+  post(id: Int!): Post!
+  posts: [Post]
+}
+
+extend type Query {
+  scope(codename: String!): Scope!
+  scopes: [Scope]
+}

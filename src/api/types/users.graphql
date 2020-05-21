@@ -1,0 +1,29 @@
+type UserPermission {
+  scope: String
+  contentType: String
+  roles: String
+}
+
+type AuthenticatedUser {
+  fullName: String!
+  email: String!
+  groups: [String]
+  permissions: [UserPermission]
+
+  user: User!
+  users: [User]
+
+  post(id: Int!): Post!
+  posts: [Post]
+}
+
+type User {
+  id: Int!
+  fullName: String!
+  email: String!
+  username: String!
+}
+
+extend type Query {
+  authenticatedUser: AuthenticatedUser
+}

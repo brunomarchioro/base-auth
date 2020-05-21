@@ -1,0 +1,4 @@
+extend type Mutation {
+  login(username: String!, password: String!): AuthenticatedUser
+  logout: Boolean!
+}

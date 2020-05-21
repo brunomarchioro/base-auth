@@ -1,10 +1,6 @@
 import SQL from "sql-template-strings"
 
-export const getPublicPosts = () => {
-
-}
-
-export const getPrivatePosts = async ({ auth }, db) => {
+export const getUserPosts = async (auth, db) => {
   console.log(auth.user.permissions.map(p => `'${p.scope}'`).join(','))
   return db.all(SQL`
       SELECT
