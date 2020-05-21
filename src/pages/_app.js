@@ -8,6 +8,8 @@ import AdminLayout from "../components/layout/AdminLayout"
 import SiteLayout from "../components/layout/SiteLayout"
 import { AuthProvider } from "../lib/contexts/AuthContext"
 
+// https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+
 function App({ Component, pageProps }) {
   const router = useRouter()
   const apolloClient = initApolloClient()
@@ -18,6 +20,7 @@ function App({ Component, pageProps }) {
       <Head>
         <title>base-app</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_mischka.min.css"/>
       </Head>
 
       <ApolloProvider client={apolloClient}>

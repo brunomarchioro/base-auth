@@ -1,5 +1,4 @@
 import React, { Fragment } from "react"
-import Head from "next/head"
 import usePrivateRoute from "../../lib/hooks/auth/usePrivateRoute"
 import AdminHeader from "./AdminHeader"
 
@@ -10,10 +9,6 @@ const AdminLayout = ({ children }) => {
 
   return (
     <Fragment>
-      <Head>
-        <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_big-stone.min.css"/>
-      </Head>
-
       <AdminHeader/>
 
       <main>
