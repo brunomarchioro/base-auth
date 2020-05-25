@@ -6,9 +6,11 @@ import { useRouter } from 'next/router'
 import PostForm from "../../../components/posts/PostForm"
 
 const createPostMutation = gql`
-  mutation createPost($title: String!, $content: String) {
-    createPost(title: $title, content: $content) {
-      id
+  mutation createPost($input: CreatePostInput!) {
+    createPost(input: $input) {
+      post {
+        id
+      }
     }
   }
 `
@@ -22,9 +24,9 @@ const AdminPostsNewPage = () => {
   const handleSubmit = async (values) => {
     try {
       const { data } = await createPost({
-        variables: values
+        variables: { input: values }
       })
-      router.push('/admin/posts/[id]', `/admin/posts/${data.createPost.id}`)
+      router.push('/admin/posts/[id]', `/admin/posts/${data.createPost.post.id}`)
     } catch (e) {
       console.log(e)
     }

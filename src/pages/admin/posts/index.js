@@ -5,17 +5,19 @@ import React from "react"
 
 const postsQuery = gql`
   {
-    posts {
-      id
-      title
+    viewer {
+      posts {
+        id
+        title
+      }
     }
   }
 `
 
 const AdminPostsListPage = () => {
-  const { loading, data } = useQuery(postsQuery);
+  const { loading, data } = useQuery(postsQuery)
 
-  if (loading) return 'Loading...';
+  if (loading) return "Loading..."
 
   return (
     <div>
@@ -28,7 +30,7 @@ const AdminPostsListPage = () => {
         </li>
       </ul>
       <ul>
-        {data?.posts.map(post => (
+        {data?.viewer?.posts?.map(post => (
           <li key={post.id}>
             <Link href={"/admin/posts/[id]"} as={`/admin/posts/${post.id}`}>
               <a>{post.title}</a>

@@ -8,12 +8,15 @@ const initialData = { isAuthenticated: false, loading: true, user: {} }
 const unauthenticatedData = { isAuthenticated: false, loading: false, user: {} }
 const authenticatedData = (user) => ({ isAuthenticated: true, loading: false, user })
 
-const authenticatedUserQuery = gql`
+const viewerQuery = gql`
   {
-    authenticatedUser {
+    viewer {
       fullName
       email
-      groups
+      groups {
+        codename
+        name
+      }
       permissions {
         scope
         contentType
@@ -31,11 +34,11 @@ function AuthProvider(props) {
   useEffect(() => {
     const fetchAuthData = async () => {
       try {
-        const { data } = await client.query({ query: authenticatedUserQuery })
+        const { data } = await client.query({ query: viewerQuery })
         console.log('fetchAuthData', data)
-        if (data.authenticatedUser) {
-          console.log('setAuthData', data.authenticatedUser)
-          setAuthData(authenticatedData(data.authenticatedUser))
+        if (data.viewer) {
+          console.log('setAuthData', data.viewer)
+          setAuthData(authenticatedData(data.viewer))
         } else {
           setAuthData(unauthenticatedData)
         }

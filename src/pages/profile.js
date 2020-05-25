@@ -4,7 +4,7 @@ import usePrivateRoute from "../lib/hooks/auth/usePrivateRoute"
 
 const userQuery = gql`
   {
-    authenticatedUser {
+    viewer {
       fullName
       email
     }
@@ -19,12 +19,12 @@ const Profile = () => {
 
   if (loading) return <p>Loading...</p>
 
-  if (data?.authenticatedUser) {
+  if (data?.viewer) {
     return (
       <div>
         <h1>Profile</h1>
-        <p>{data.authenticatedUser.fullName}</p>
-        <p>{data.authenticatedUser.email}</p>
+        <p>{data.viewer.fullName}</p>
+        <p>{data.viewer.email}</p>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-export default async function logout(_parent, _args, { auth }) {
+export default async (_parent, _args, { auth }) => {
   auth.destroy()
   return true
 }

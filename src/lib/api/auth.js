@@ -1,6 +1,7 @@
 import { applySession } from "next-iron-session"
+import { AuthenticationError, ForbiddenError } from "apollo-server-micro"
 
-const getAuth = async ({ req, res }) => {
+export const getAuth = async ({ req, res }) => {
   const options = {
     password: process.env.SECRET_COOKIE_PASSWORD,
     cookieName: "base-auth/session",
@@ -23,4 +24,14 @@ const getAuth = async ({ req, res }) => {
   }
 }
 
-export default getAuth
+export const requireAuth = (auth) => {
+  if (!auth) {
+    throw new AuthenticationError("Você deve estar logado!")
+  }
+}
+
+export const can = ({ scope, contentType, role, auth }) => {
+  if (!auth.isAuthenticated) {
+    throw new AuthenticationError("Você deve estar logado!")
+  }
+}

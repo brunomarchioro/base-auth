@@ -8,6 +8,6 @@ type Scope {
 }
 
 extend type Query {
-  scope(codename: String!): Scope!
+  scope(codename: String): Scope!
   scopes: [Scope]
 }

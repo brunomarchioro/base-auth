@@ -1,20 +1,7 @@
-type UserPermission {
-  scope: String
-  contentType: String
-  roles: String
-}
-
-type AuthenticatedUser {
-  fullName: String!
-  email: String!
-  groups: [String]
-  permissions: [UserPermission]
-
-  user: User!
-  users: [User]
-
-  post(id: Int!): Post!
-  posts: [Post]
+type Group {
+  id: Int!
+  codename: String!
+  name: String!
 }
 
 type User {
@@ -22,8 +9,4 @@ type User {
   fullName: String!
   email: String!
   username: String!
-}
-
-extend type Query {
-  authenticatedUser: AuthenticatedUser
 }

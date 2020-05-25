@@ -1,13 +1,13 @@
-import SQL from "sql-template-strings"
+import updatePost from "api/models/posts/updatePost"
+import { requireAuth } from "lib/api/auth"
+import { updatePostSchema } from "lib/validation/posts"
+import validate from "lib/validation/validate"
 
-export default async function updatePost(_parent, { id, ...args }, { db }) {
-  await db.run(SQL`
-        UPDATE posts SET
-            title = ${args.title},
-            content = ${args.content}
-        WHERE
-            id = ${id}
-      `)
+export default async (_parent, { input }, { auth }) => {
+  requireAuth(auth)
 
-  return db.get(SQL`SELECT * FROM posts WHERE id = ${id}`)
+  const data = await validate(updatePostSchema, input)
+  const post = await updatePost(data)
+
+  return { post }
 }

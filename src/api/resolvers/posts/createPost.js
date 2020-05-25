@@ -1,12 +1,16 @@
-import SQL from "sql-template-strings"
+import createPost from "api/models/posts/createPost"
+import { requireAuth } from "lib/api/auth"
+import { createPostSchema } from "lib/validation/posts"
+import validate from "lib/validation/validate"
 
-export default async function createPost(_parent, args, { db }) {
-  const result = await db.run(SQL`
-        INSERT INTO posts
-            (title, content)
-        VALUES 
-            (${args.title}, ${args.content})
-      `)
+export default async (_parent, { input }, { auth }) => {
+  requireAuth(auth)
 
-  return db.get(SQL`SELECT * FROM posts WHERE id = ${result.lastID}`)
+  const data = await validate(createPostSchema, input)
+
+  console.log(data)
+
+  const post = await createPost(data)
+
+  return { post }
 }

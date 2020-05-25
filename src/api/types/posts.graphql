@@ -4,7 +4,53 @@ type Post {
   content: String
 }
 
+input CreatePostInput {
+  title: String
+  content: String
+}
+
+type CreatePostPayload {
+  post: Post
+}
+
+input UpdatePostInput {
+  id: Int!
+  title: String
+  content: String
+}
+
+type UpdatePostPayload {
+  post: Post
+}
+
+input DeletePostInput {
+  id: Int!
+}
+
+type DeletePostPayload {
+  post: Post
+}
+
+input TogglePostPublishedInput {
+  id: Int!
+}
+
+type TogglePostPublishedPayload {
+  post: Post
+}
+
+input TogglePostFeaturedInput {
+  id: Int!
+}
+
+type TogglePostFeaturedPayload {
+  post: Post
+}
+
 extend type Mutation {
-  createPost(title: String!, content: String): Post!
-  updatePost(id: Int!, title: String, content: String): Post!
+  createPost(input: CreatePostInput!): CreatePostPayload
+  updatePost(input: UpdatePostInput!): UpdatePostPayload
+  deletePost(input: DeletePostInput!): DeletePostPayload
+  togglePostPublished(input: TogglePostPublishedInput!): TogglePostPublishedPayload
+  togglePostFeatured(input: TogglePostFeaturedInput!): TogglePostFeaturedPayload
 }

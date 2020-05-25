@@ -1,0 +1,22 @@
+type ViewerPermission {
+  scope: String
+  contentType: String
+  roles: String
+}
+
+type Viewer {
+  fullName: String!
+  email: String!
+  groups: [Group]
+  permissions: [ViewerPermission]
+
+  user: User!
+  users: [User]
+
+  post(id: Int!): Post!
+  posts: [Post]
+}
+
+extend type Query {
+  viewer: Viewer
+}

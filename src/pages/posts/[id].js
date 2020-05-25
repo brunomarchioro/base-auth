@@ -3,10 +3,12 @@ import initApolloSchemaClient from "../../api/schemaClient"
 
 const postQuery = gql`
   query post($id: Int!) {
-    post(id: $id) {
-      id
-      title
-      content
+    scope {
+      post(id: $id) {
+        id
+        title
+        content
+      }
     }
   }
 `
@@ -30,7 +32,7 @@ export async function getStaticProps(ctx) {
 
   return {
     unstable_revalidate: 1,
-    props: { post: data.post }
+    props: { post: data.scope.post }
   }
 }
 

@@ -2,22 +2,26 @@ import { useMutation, useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { useRouter } from "next/router"
 import React from "react"
-import PostForm from "../../../components/posts/PostForm"
+import PostForm from "components/posts/PostForm"
 
 const postQuery = gql`
   query post($id: Int!) {
-    post(id: $id) {
-      id
-      title
-      content
+    viewer {
+      post(id: $id) {
+        id
+        title
+        content
+      }
     }
   }
 `
 
 const updatePostMutation = gql`
-  mutation updatePost($id: Int!, $title: String!, $content: String) {
-    updatePost(id: $id, title: $title, content: $content) {
-      id
+  mutation updatePost($input: UpdatePostInput!) {
+    updatePost(input: $input) {
+      post {
+        id
+      }
     }
   }
 `
@@ -37,8 +41,10 @@ const AdminPostsShowPage = () => {
     try {
       const { data } = await updatePost({
         variables: {
-          id: parseInt(id, 10),
-          ...values
+          input: {
+            id: parseInt(id, 10),
+            ...values
+          }
         }
       })
       console.log(data)
@@ -47,7 +53,9 @@ const AdminPostsShowPage = () => {
     }
   }
 
-  if (loading) return "Loading..."
+  if (loading || !data) return "Loading..."
+
+  const { __typename, ...post } = data.viewer.post
 
   return (
     <div>
@@ -57,7 +65,7 @@ const AdminPostsShowPage = () => {
         <p>save error!</p>
       )}
 
-      <PostForm defaultValues={data.post} handleSubmit={handleSubmit}/>
+      <PostForm defaultValues={post} handleSubmit={handleSubmit}/>
     </div>
   )
 }

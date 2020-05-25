@@ -10,7 +10,10 @@ const loginMutation = gql`
     login(username: $username, password: $password) {
       fullName
       email
-      groups
+      groups {
+        codename
+        name
+      }
       permissions {
         scope
         contentType
