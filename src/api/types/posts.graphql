@@ -1,5 +1,5 @@
 type Post {
-  id: Int!
+  postId: Int!
   title: String
   content: String
 }
@@ -14,7 +14,7 @@ type CreatePostPayload {
 }
 
 input UpdatePostInput {
-  id: Int!
+  postId: Int!
   title: String
   content: String
 }
@@ -24,7 +24,7 @@ type UpdatePostPayload {
 }
 
 input DeletePostInput {
-  id: Int!
+  postId: Int!
 }
 
 type DeletePostPayload {
@@ -32,7 +32,7 @@ type DeletePostPayload {
 }
 
 input TogglePostPublishedInput {
-  id: Int!
+  postId: Int!
 }
 
 type TogglePostPublishedPayload {
@@ -40,7 +40,7 @@ type TogglePostPublishedPayload {
 }
 
 input TogglePostFeaturedInput {
-  id: Int!
+  postId: Int!
 }
 
 type TogglePostFeaturedPayload {

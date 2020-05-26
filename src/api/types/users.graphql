@@ -1,11 +1,11 @@
 type Group {
-  id: Int!
+  groupId: Int!
   codename: String!
   name: String!
 }
 
 type User {
-  id: Int!
+  userId: Int!
   fullName: String!
   email: String!
   username: String!

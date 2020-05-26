@@ -1,15 +1,14 @@
 import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import React from "react"
-import { useForm } from "react-hook-form"
 import { useRouter } from 'next/router'
-import PostForm from "../../../components/posts/PostForm"
+import PostForm from "components/admin/posts/PostForm"
 
 const createPostMutation = gql`
   mutation createPost($input: CreatePostInput!) {
     createPost(input: $input) {
       post {
-        id
+        postId
       }
     }
   }
@@ -19,14 +18,12 @@ const AdminPostsNewPage = () => {
   const router = useRouter()
   const [createPost, { error: submitError }] = useMutation(createPostMutation);
 
-  const { register, errors, ...methods } = useForm()
-
   const handleSubmit = async (values) => {
     try {
       const { data } = await createPost({
         variables: { input: values }
       })
-      router.push('/admin/posts/[id]', `/admin/posts/${data.createPost.post.id}`)
+      router.push('/admin/posts/[postId]', `/admin/posts/${data.createPost.post.postId}`)
     } catch (e) {
       console.log(e)
     }

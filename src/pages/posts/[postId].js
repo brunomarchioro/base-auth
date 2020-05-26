@@ -2,10 +2,10 @@ import gql from "graphql-tag"
 import initApolloSchemaClient from "../../api/schemaClient"
 
 const postQuery = gql`
-  query post($id: Int!) {
+  query post($postId: Int!) {
     scope {
-      post(id: $id) {
-        id
+      post(postId: $postId) {
+        postId
         title
         content
       }
@@ -22,12 +22,12 @@ const PostShowPage = ({ post }) => (
 )
 
 export async function getStaticProps(ctx) {
-  const { id } = ctx.params
+  const { postId } = ctx.params
   const apolloClient = await initApolloSchemaClient()
 
   const { data } = await apolloClient.query({
     query: postQuery,
-    variables: { id: parseInt(id, 10) }
+    variables: { postId: parseInt(postId, 10) }
   })
 
   return {

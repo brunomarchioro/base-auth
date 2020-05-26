@@ -2,13 +2,13 @@ import { useMutation, useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { useRouter } from "next/router"
 import React from "react"
-import PostForm from "components/posts/PostForm"
+import PostForm from "components/admin/posts/PostForm"
 
 const postQuery = gql`
-  query post($id: Int!) {
+  query post($postId: Int!) {
     viewer {
-      post(id: $id) {
-        id
+      post(postId: $postId) {
+        postId
         title
         content
       }
@@ -20,7 +20,7 @@ const updatePostMutation = gql`
   mutation updatePost($input: UpdatePostInput!) {
     updatePost(input: $input) {
       post {
-        id
+        postId
       }
     }
   }
@@ -28,11 +28,11 @@ const updatePostMutation = gql`
 
 const AdminPostsShowPage = () => {
   const router = useRouter()
-  const { id } = router.query
+  const { postId } = router.query
 
   const { loading, data } = useQuery(postQuery, {
-    variables: { id: parseInt(id, 10) },
-    skip: !id
+    variables: { postId: parseInt(postId, 10) },
+    skip: !postId
   })
 
   const [updatePost, { error: submitError }] = useMutation(updatePostMutation)
@@ -42,7 +42,7 @@ const AdminPostsShowPage = () => {
       const { data } = await updatePost({
         variables: {
           input: {
-            id: parseInt(id, 10),
+            postId: parseInt(postId, 10),
             ...values
           }
         }

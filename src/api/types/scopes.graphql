@@ -1,10 +1,15 @@
+type PostList {
+  entries: [Post]
+  pageInfo: PageInfo
+}
+
 type Scope {
-  id: Int!
+  scopeId: Int!
   codename: String!
   name: String!
 
-  post(id: Int!): Post!
-  posts: [Post]
+  post(postId: Int!): Post!
+  posts: PostList
 }
 
 extend type Query {

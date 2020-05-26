@@ -1,7 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik"
 import { createPostSchema, updatePostSchema } from "lib/validation/posts"
 import React from "react"
-import { useForm } from "react-hook-form"
 import faker from "faker"
 
 const PostForm = ({ defaultValues, handleSubmit }) => {

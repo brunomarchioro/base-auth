@@ -31,7 +31,7 @@ export const requireAuth = (auth) => {
 }
 
 export const can = ({ scope, contentType, role, auth }) => {
-  if (!auth.isAuthenticated) {
-    throw new AuthenticationError("Você deve estar logado!")
+  if (!auth) {
+    throw new ForbiddenError("Você deve estar logado!")
   }
 }

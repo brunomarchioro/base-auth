@@ -1,8 +1,8 @@
-import { AuthenticationError } from "apollo-server-micro"
 import db from "api/connectors/pgsql"
+import { AuthenticationError } from "apollo-server-micro"
 import { sql } from "slonik"
 
-export default async (_parent, _args, { auth }) => {
+export default async ({ auth }) => {
   try {
     return db.one(sql`
       SELECT
@@ -10,7 +10,7 @@ export default async (_parent, _args, { auth }) => {
       FROM
         users
       WHERE
-        id = ${auth.user.id}
+        user_id = ${auth.user.userId}
   `)
   } catch (e) {
     console.log(e)

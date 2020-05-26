@@ -15,20 +15,20 @@ export default async () => {
     DROP TABLE IF EXISTS posts_x_scopes CASCADE;
 
     CREATE TABLE content_types (
-      id       SERIAL       NOT NULL PRIMARY KEY,
-      codename VARCHAR(100) NOT NULL UNIQUE,
-      name     VARCHAR(255)
+      content_type_id SERIAL       NOT NULL PRIMARY KEY,
+      codename        VARCHAR(100) NOT NULL UNIQUE,
+      name            VARCHAR(255)
     );
 
     CREATE TABLE scopes (
-      id         SERIAL       NOT NULL PRIMARY KEY,
+      scope_id   SERIAL       NOT NULL PRIMARY KEY,
       codename   VARCHAR(100) NOT NULL UNIQUE,
       name       VARCHAR(255) NOT NULL UNIQUE,
       is_default BOOLEAN DEFAULT FALSE
     );
 
     CREATE TABLE users (
-      id         SERIAL       NOT NULL PRIMARY KEY,
+      user_id    SERIAL       NOT NULL PRIMARY KEY,
       username   VARCHAR(255) NOT NULL UNIQUE,
       salt       VARCHAR(255) NOT NULL,
       hash       VARCHAR(255) NOT NULL,
@@ -38,42 +38,42 @@ export default async () => {
     );
 
     CREATE TABLE groups (
-      id       SERIAL       NOT NULL PRIMARY KEY,
+      group_id SERIAL       NOT NULL PRIMARY KEY,
       codename VARCHAR(100) NOT NULL UNIQUE,
       name     VARCHAR(255) NOT NULL UNIQUE
     );
 
     CREATE TABLE permissions (
-      id              SERIAL NOT NULL PRIMARY KEY,
-      scope_id        INTEGER REFERENCES scopes (id) ON DELETE CASCADE,
-      group_id        INTEGER REFERENCES groups (id) ON DELETE CASCADE,
-      content_type_id INTEGER REFERENCES content_types (id) ON DELETE CASCADE,
+      permission_id   SERIAL NOT NULL PRIMARY KEY,
+      scope_id        INTEGER REFERENCES scopes (scope_id) ON DELETE CASCADE,
+      group_id        INTEGER REFERENCES groups (group_id) ON DELETE CASCADE,
+      content_type_id INTEGER REFERENCES content_types (content_type_id) ON DELETE CASCADE,
       roles           VARCHAR(255)
     );
 
     CREATE TABLE users_x_groups (
-      id       SERIAL NOT NULL PRIMARY KEY,
-      user_id  INTEGER REFERENCES users (id) ON DELETE CASCADE,
-      group_id INTEGER REFERENCES groups (id) ON DELETE CASCADE
+      user_x_group_id SERIAL NOT NULL PRIMARY KEY,
+      user_id         INTEGER REFERENCES users (user_id) ON DELETE CASCADE,
+      group_id        INTEGER REFERENCES groups (group_id) ON DELETE CASCADE
     );
 
     CREATE TABLE content_types_x_scopes (
-      id              SERIAL NOT NULL PRIMARY KEY,
-      content_type_id INTEGER REFERENCES content_types (id) ON DELETE CASCADE,
-      scopeid         INTEGER REFERENCES scopes (id) ON DELETE CASCADE
+      content_type_x_scope_id SERIAL NOT NULL PRIMARY KEY,
+      content_type_id         INTEGER REFERENCES content_types (content_type_id) ON DELETE CASCADE,
+      scopeid                 INTEGER REFERENCES scopes (scope_id) ON DELETE CASCADE
     );
 
     CREATE TABLE posts_status (
-      id       SERIAL       NOT NULL PRIMARY KEY,
-      codename VARCHAR(100) NOT NULL UNIQUE,
-      name     VARCHAR(255)
+      posts_status_id SERIAL       NOT NULL PRIMARY KEY,
+      codename        VARCHAR(100) NOT NULL UNIQUE,
+      name            VARCHAR(255)
     );
 
     CREATE TABLE posts (
-      id        SERIAL       NOT NULL PRIMARY KEY,
-      parent_id INTEGER REFERENCES posts (id) ON DELETE CASCADE,
-      status_id INTEGER REFERENCES posts_status (id) ON DELETE CASCADE,
-      author_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+      post_id  SERIAL       NOT NULL PRIMARY KEY,
+      parent_id INTEGER REFERENCES posts (post_id) ON DELETE CASCADE,
+      status_id INTEGER REFERENCES posts_status (posts_status_id) ON DELETE CASCADE,
+      author_id INTEGER REFERENCES users (user_id) ON DELETE CASCADE,
       featured  BOOLEAN,
       title     VARCHAR(255) NOT NULL,
       slug      VARCHAR(255),
@@ -82,9 +82,9 @@ export default async () => {
     );
 
     CREATE TABLE posts_x_scopes (
-      id       SERIAL NOT NULL PRIMARY KEY,
-      post_id  INTEGER REFERENCES posts (id) ON DELETE CASCADE,
-      scope_id INTEGER REFERENCES scopes (id) ON DELETE CASCADE
+      post_x_scope_id SERIAL NOT NULL PRIMARY KEY,
+      post_id         INTEGER REFERENCES posts (post_id) ON DELETE CASCADE,
+      scope_id        INTEGER REFERENCES scopes (scope_id) ON DELETE CASCADE
     );
   `)
 }

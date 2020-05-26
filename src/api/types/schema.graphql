@@ -1,3 +1,16 @@
+scalar JSON
+scalar Date
+scalar Time
+scalar DateTime
+
+type PageInfo {
+  totalCount: Int
+  totalPages: Int
+  currentPage: Int
+  pageSize: Int
+  hasNextPage: Boolean
+}
+
 type Query {
   _empty: String
 }

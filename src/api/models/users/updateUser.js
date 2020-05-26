@@ -4,7 +4,7 @@ import { raw } from "slonik-sql-tag-raw"
 import db from "api/connectors/pgsql"
 import snakeCaseKeys from "snakecase-keys"
 
-export default async ({ id, ...input }) => {
+export default async ({ userId, ...input }) => {
   const fields = Object.entries(snakeCaseKeys(input)).map(([key, value]) => {
     if (key === "password") {
       const salt = crypto.randomBytes(16).toString('hex')
@@ -15,13 +15,15 @@ export default async ({ id, ...input }) => {
     return `${key} = '${value}'`
   }).join(", ")
 
+  console.log(fields)
+
   return db.one(sql` 
     UPDATE
       users
     SET
       ${raw(fields)}
     WHERE
-      id = ${id}
+      user_id = ${userId}
     RETURNING *
   `)
 }

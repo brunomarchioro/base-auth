@@ -7,8 +7,10 @@ const postsQuery = gql`
   {
     scope {
       posts {
-        id
-        title
+        entries {
+          postId
+          title
+        }
       } 
     }
   }
@@ -19,8 +21,8 @@ const PostListPage = ({ posts }) => (
     <h1>Post list</h1>
     <ul>
       {posts.map(post => (
-        <li key={post.id}>
-          <Link href={"/posts/[id]"} as={`/posts/${post.id}`}>
+        <li key={post.postId}>
+          <Link href={"/posts/[postId]"} as={`/posts/${post.postId}`}>
             <a>{post.title}</a>
           </Link>
         </li>
@@ -36,9 +38,11 @@ export async function getStaticProps() {
     query: postsQuery
   })
 
+  console.log(data?.scope?.posts?.entries)
+
   return {
     unstable_revalidate: 1,
-    props: { posts: data.scope.posts }
+    props: { posts: [] }
   }
 }
 

@@ -14,7 +14,7 @@ export default async ({ id, ...input }) => {
     SET
       ${raw(fields)}
     WHERE
-      id = ${id}
+      post_id = ${id}
     RETURNING *
   `)
 }

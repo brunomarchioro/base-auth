@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import usePrivateRoute from "../../lib/hooks/auth/usePrivateRoute"
+import usePrivateRoute from "lib/hooks/auth/usePrivateRoute"
 import AdminHeader from "./AdminHeader"
 
 const AdminLayout = ({ children }) => {

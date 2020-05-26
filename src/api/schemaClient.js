@@ -1,3 +1,4 @@
+import { dataIdFromObject } from "api/client"
 import { getContext, schema } from "api/index"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { ApolloClient } from "apollo-client"
@@ -9,7 +10,7 @@ const initApolloSchemaClient = async (ctx) => {
   return new ApolloClient({
     ssrMode: true,
     link: new SchemaLink({ schema, context }),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache({ dataIdFromObject })
   })
 }
 

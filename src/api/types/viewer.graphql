@@ -5,6 +5,7 @@ type ViewerPermission {
 }
 
 type Viewer {
+  userId: Int!
   fullName: String!
   email: String!
   groups: [Group]
@@ -13,7 +14,7 @@ type Viewer {
   user: User!
   users: [User]
 
-  post(id: Int!): Post!
+  post(postId: Int!): Post!
   posts: [Post]
 }
 

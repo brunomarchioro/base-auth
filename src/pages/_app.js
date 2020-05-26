@@ -3,10 +3,10 @@ import { ApolloProvider } from "@apollo/react-common"
 import { useRouter } from "next/router"
 import React, { Fragment } from "react"
 import Head from "next/head"
-import { initApolloClient } from "../api/client"
-import AdminLayout from "../components/layout/AdminLayout"
-import SiteLayout from "../components/layout/SiteLayout"
-import { AuthProvider } from "../lib/contexts/AuthContext"
+import { initApolloClient } from "api/client"
+import AdminLayout from "components/admin/layout/AdminLayout"
+import SiteLayout from "components/layout/SiteLayout"
+import { AuthProvider } from "lib/contexts/AuthContext"
 
 // https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
 
