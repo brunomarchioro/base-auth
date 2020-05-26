@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useAuth } from "../../lib/contexts/AuthContext"
+import { useAuth } from "lib/contexts/AuthContext"
 
 const AdminHeader = () => {
   const { user } = useAuth()

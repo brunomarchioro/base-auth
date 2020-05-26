@@ -1,5 +1,6 @@
 import findPosts from "api/models/posts/findPosts"
 import getPostById from "api/models/posts/getPostById"
+import findScopes from "api/models/scopes/findScopes"
 import getDefaultScope from "api/models/scopes/getDefaultScope"
 import getScopeByCodename from "api/models/scopes/getScopeByCodename"
 
@@ -42,7 +43,7 @@ export default {
 
     scopes: async (_parent, _args) => {
       try {
-        return []
+        return findScopes()
       } catch (error) {
         console.error(error)
       }

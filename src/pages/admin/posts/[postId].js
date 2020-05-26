@@ -65,7 +65,7 @@ const AdminPostsShowPage = () => {
         <p>save error!</p>
       )}
 
-      <PostForm defaultValues={post} handleSubmit={handleSubmit}/>
+      <PostForm initialValues={post} handleSubmit={handleSubmit}/>
     </div>
   )
 }

@@ -4,6 +4,11 @@ type Post {
   content: String
 }
 
+type PostList {
+  entries: [Post]
+  pageInfo: PageInfo
+}
+
 input CreatePostInput {
   title: String
   content: String

@@ -20,10 +20,11 @@ const AdminPostsNewPage = () => {
 
   const handleSubmit = async (values) => {
     try {
+      console.log(values)
       const { data } = await createPost({
         variables: { input: values }
       })
-      router.push('/admin/posts/[postId]', `/admin/posts/${data.createPost.post.postId}`)
+      // router.push('/admin/posts/[postId]', `/admin/posts/${data.createPost.post.postId}`)
     } catch (e) {
       console.log(e)
     }
