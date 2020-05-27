@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks"
+import { Input, Textarea } from "components/ui"
 import gql from "graphql-tag"
 import { createPostSchema, updatePostSchema } from "lib/validation/posts"
 import React from "react"
@@ -38,10 +39,10 @@ const PostForm = ({ initialValues, onSubmit }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="title">title</label>
-        <input
+        <Input
           name="title"
           type="text"
-          ref={register}
+          inputRef={register}
         />
         {errors.title && (
           <p>{errors.title.message}</p>
@@ -52,9 +53,9 @@ const PostForm = ({ initialValues, onSubmit }) => {
 
       <div>
         <label htmlFor="content">content</label>
-        <textarea
+        <Textarea
           name="content"
-          ref={register}
+          inputRef={register}
         />
         {errors.content && (
           <p>{errors.content.message}</p>

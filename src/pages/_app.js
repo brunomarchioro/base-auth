@@ -1,5 +1,6 @@
 import "../styles/index.css"
 import { ApolloProvider } from "@apollo/react-common"
+import { AppProvider } from "lib/contexts/AppContext"
 import { useRouter } from "next/router"
 import React, { Fragment } from "react"
 import Head from "next/head"
@@ -19,21 +20,23 @@ function App({ Component, pageProps }) {
     <Fragment>
       <Head>
         <title>base-app</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
         {/*<link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_mischka.min.css"/>*/}
       </Head>
 
       <ApolloProvider client={apolloClient}>
         <AuthProvider>
-          {router.pathname.startsWith("/admin") ? (
-            <AdminLayout>
-              <Component {...pageProps} />
-            </AdminLayout>
-          ) : (
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          )}
+          <AppProvider>
+            {router.pathname.startsWith("/admin") ? (
+              <AdminLayout>
+                <Component {...pageProps} />
+              </AdminLayout>
+            ) : (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            )}
+          </AppProvider>
         </AuthProvider>
       </ApolloProvider>
     </Fragment>
