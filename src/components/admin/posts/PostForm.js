@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/react-hooks"
-import { ErrorMessage, Field, Form, Formik, useField } from "formik"
 import gql from "graphql-tag"
 import { createPostSchema, updatePostSchema } from "lib/validation/posts"
 import React from "react"
+import { useForm } from "react-hook-form"
 import faker from "faker"
 
 const scopesQuery = gql`
@@ -16,69 +16,58 @@ const scopesQuery = gql`
   }
 `
 
-const ScopesInput = (props) => {
-  const [field, meta, helpers] = useField(props.name)
-  const { loading, data } = useQuery(scopesQuery)
+const ScopesInput = ({ name, inputRef }) => {
+  const { data } = useQuery(scopesQuery)
 
-  if (loading || !data) return "Loading..."
-
-  console.log(data)
   return (
-    <select {...field} {...props}>
+    <select name={name} ref={inputRef} multiple>
       {data?.scopes?.entries.map(scope => (
-        <option value={scope.scopeId}>{scope.name}</option>
+        <option key={scope.scopeId} value={scope.scopeId}>{scope.name}</option>
       ))}
     </select>
   )
 }
 
-const getInitialValues = (initialValues) => {
-  const defaultValues = {
-    scopes: [],
-    title: '',
-    content: ''
-  }
+const PostForm = ({ initialValues, onSubmit }) => {
+  const { register, errors, setValue, handleSubmit } = useForm({
+    defaultValues: initialValues,
+    validationSchema: initialValues ? updatePostSchema : createPostSchema
+  })
 
-  console.log({ ...defaultValues, ...initialValues })
-
-  return { ...defaultValues, ...initialValues }
-}
-
-const PostForm = ({ initialValues, handleSubmit }) => {
   return (
-    <Formik
-      initialValues={getInitialValues(initialValues)}
-      validationSchema={initialValues ? updatePostSchema : createPostSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        await handleSubmit(values)
-        setSubmitting(false)
-      }}
-    >
-      {({ isSubmitting, setValues }) => (
-        <Form>
-          <Field type="text" name="title"/>
-          <ErrorMessage name="title" component="div"/>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label htmlFor="title">title</label>
+        <input
+          name="title"
+          type="text"
+          ref={register}
+        />
+        {errors.title && (
+          <p>{errors.title.message}</p>
+        )}
+      </div>
 
-          <ScopesInput name="scopes"/>
+      <ScopesInput name="scopeIds" inputRef={register}/>
 
-          <Field as="textarea" name="content"/>
-          <ErrorMessage name="content" component="div"/>
+      <div>
+        <label htmlFor="content">content</label>
+        <textarea
+          name="content"
+          ref={register}
+        />
+        {errors.content && (
+          <p>{errors.content.message}</p>
+        )}
+      </div>
 
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-
-          <button onClick={() => {
-            const title = faker.lorem.words()
-            setValues({
-              title: title.charAt(0).toUpperCase() + title.slice(1),
-              content: [faker.lorem.text(), faker.lorem.text(), faker.lorem.text()].join("\n")
-            })
-          }}>random
-          </button>
-        </Form>
-      )}
-    </Formik>
+      <button type="submit">send</button>
+      <button onClick={() => {
+        const title = faker.lorem.words()
+        setValue('title', title.charAt(0).toUpperCase() + title.slice(1))
+        setValue('content', [faker.lorem.text(),faker.lorem.text(),faker.lorem.text()].join('\n'))
+      }}>random</button>
+    </form>
   )
 }
 

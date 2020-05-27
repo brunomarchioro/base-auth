@@ -11,6 +11,7 @@ type PostList {
 
 input CreatePostInput {
   title: String
+  scopeIds: [Int]
   content: String
 }
 
@@ -21,6 +22,7 @@ type CreatePostPayload {
 input UpdatePostInput {
   postId: Int!
   title: String
+  scopeIds: [Int]
   content: String
 }
 

@@ -20,7 +20,7 @@ function App({ Component, pageProps }) {
       <Head>
         <title>base-app</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_mischka.min.css"/>
+        {/*<link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_mischka.min.css"/>*/}
       </Head>
 
       <ApolloProvider client={apolloClient}>

@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { useRouter } from "next/router"
 import React from "react"
-import PostForm from "components/admin/posts/PostForm"
+import PostFormFormik from "components/admin/posts/PostForm"
 
 const postQuery = gql`
   query post($postId: Int!) {
@@ -65,7 +65,7 @@ const AdminPostsShowPage = () => {
         <p>save error!</p>
       )}
 
-      <PostForm initialValues={post} handleSubmit={handleSubmit}/>
+      <PostFormFormik initialValues={post} onSubmit={handleSubmit}/>
     </div>
   )
 }
