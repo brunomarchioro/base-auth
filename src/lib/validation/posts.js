@@ -7,6 +7,7 @@ export const createPostSchema = object().shape({
 });
 
 export const updatePostSchema = object().shape({
+  postId: string().required().trim(),
   title: string().trim(),
   scopeIds: array(number()),
   content: string().trim(),

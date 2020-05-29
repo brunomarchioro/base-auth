@@ -6,9 +6,9 @@ import getScopeByCodename from "api/models/scopes/getScopeByCodename"
 
 export default {
   Scope: {
-    post: async (_parent, { id }, { db }) => {
+    post: async (_parent, { postId }, { db }) => {
       try {
-        return getPostById(id)
+        return getPostById(postId)
       } catch (error) {
         console.error(error)
       }

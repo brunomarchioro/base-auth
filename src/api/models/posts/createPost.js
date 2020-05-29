@@ -1,7 +1,6 @@
 import { sql } from "slonik"
-import db from "api/connectors/pgsql"
 
-export default async ({ title, content }) => {
+export default async ({ title, content }, db) => {
   return await db.one(sql`
     INSERT INTO posts
       (title, content)

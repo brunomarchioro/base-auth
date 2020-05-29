@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks"
 import gql from "graphql-tag"
 import { useRouter } from "next/router"
 import React from "react"
-import PostFormFormik from "components/admin/posts/PostForm"
+import PostForm from "components/admin/posts/PostForm"
 
 const postQuery = gql`
   query post($postId: Int!) {
@@ -37,13 +37,14 @@ const AdminPostsShowPage = () => {
 
   const [updatePost, { error: submitError }] = useMutation(updatePostMutation)
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async ({ scopeIds, ...values }) => {
     try {
       const { data } = await updatePost({
         variables: {
           input: {
+            ...values,
             postId: parseInt(postId, 10),
-            ...values
+            scopeIds: scopeIds.map(scopeId => parseInt(scopeId, 10)),
           }
         }
       })
@@ -65,7 +66,7 @@ const AdminPostsShowPage = () => {
         <p>save error!</p>
       )}
 
-      <PostFormFormik initialValues={post} onSubmit={handleSubmit}/>
+      <PostForm initialValues={post} onSubmit={handleSubmit}/>
     </div>
   )
 }

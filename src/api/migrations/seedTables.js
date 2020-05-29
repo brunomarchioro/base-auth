@@ -19,12 +19,12 @@ export default async () => {
       ('posts', 'Notícias');
 
     INSERT INTO
-      content_types_x_scopes (content_type_id, scopeid)
+      content_types_x_scopes (content_type_id, scope_id)
     VALUES
       (1, 1);
 
     INSERT INTO
-      posts_status (codename, name)
+      post_status (codename, name)
     VALUES
       ('published', 'Publicado');
   `)

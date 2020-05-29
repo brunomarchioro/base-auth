@@ -1,4 +1,3 @@
-import "../styles/index.css"
 import { ApolloProvider } from "@apollo/react-common"
 import { AppProvider } from "lib/contexts/AppContext"
 import { useRouter } from "next/router"
@@ -21,7 +20,6 @@ function App({ Component, pageProps }) {
       <Head>
         <title>base-app</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-        {/*<link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm_theme_mischka.min.css"/>*/}
       </Head>
 
       <ApolloProvider client={apolloClient}>

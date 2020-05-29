@@ -1,8 +1,9 @@
 import { useMutation } from "@apollo/react-hooks"
 import gql from "graphql-tag"
+import omit from "lodash/omit"
 import React from "react"
 import { useRouter } from 'next/router'
-import PostFormFormik from "components/admin/posts/PostForm"
+import PostForm from "components/admin/posts/PostForm"
 
 const createPostMutation = gql`
   mutation createPost($input: CreatePostInput!) {
@@ -21,7 +22,7 @@ const AdminPostsNewPage = () => {
   const handleSubmit = async (values) => {
     try {
       const { data } = await createPost({
-        variables: { input: values }
+        variables: { input: omit(values, 'postId') }
       })
       router.push('/admin/posts/[postId]', `/admin/posts/${data.createPost.post.postId}`)
     } catch (e) {
@@ -37,7 +38,7 @@ const AdminPostsNewPage = () => {
         <p>save error!</p>
       )}
 
-      <PostFormFormik onSubmit={handleSubmit} />
+      <PostForm onSubmit={handleSubmit} />
     </div>
   )
 }

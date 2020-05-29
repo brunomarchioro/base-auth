@@ -1,19 +1,21 @@
 import gql from "graphql-tag"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import React from "react"
 import initApolloSchemaClient from "../../api/schemaClient"
 
 const scopeQuery = gql`
   query scope($codename: String!) {
     scope(codename: $codename) {
-      id
+      scopeId
       codename
       name
-    }
-    posts(scopeCodename: $codename) {
-      id
-      title
+
+      posts {
+        entries {
+          postId
+          title
+        }
+      }
     }
   }
 `
@@ -21,9 +23,11 @@ const scopeQuery = gql`
 const scopesQuery = gql`
   query {
     scopes {
-      id
-      codename
-      name
+      entries {
+        scopeId
+        codename
+        name
+      }
     }
   }
 `
@@ -60,7 +64,7 @@ export async function getStaticProps(ctx) {
     unstable_revalidate: 1,
     props: {
       scope: data.scope,
-      posts: data.posts
+      posts: data.posts.entries
     }
   }
 }
@@ -72,8 +76,10 @@ export async function getStaticPaths() {
     query: scopesQuery
   })
 
+  console.log(data)
+
   return {
-    paths: data.scopes.map(scope => ({ params: { scope: scope.codename } })),
+    paths: data.scopes.entries.map(scope => ({ params: { scope: scope.codename } })),
     fallback: false
   };
 }

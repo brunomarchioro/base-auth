@@ -52,7 +52,7 @@ export default async ({ query, filters, page, pageSize, ...args } = {}) => {
       *, count(*) OVER () AS total_rows
     FROM
       posts
-      LEFT JOIN posts_status ON posts.status_id = posts_status.posts_status_id
+      LEFT JOIN post_status ON posts.status_id = post_status.post_status_id
       LEFT JOIN posts_x_scopes ON posts.post_id = posts_x_scopes.post_x_scope_id
       LEFT JOIN scopes ON posts_x_scopes.scope_id = scopes.scope_id
     WHERE ${raw(where)}

@@ -1,12 +1,11 @@
 import { sql } from "slonik"
 import { raw } from "slonik-sql-tag-raw"
-import db from "api/connectors/pgsql"
 import snakeCaseKeys from "snakecase-keys"
 
-export default async ({ id, ...input }) => {
+export default async ({ postId, ...input }, db) => {
   const fields = Object.entries(snakeCaseKeys(input)).map(([key, value]) => {
     return `${key} = '${value}'`
-  }).join(", ")
+  }).filter(i => i).join(", ")
 
   return db.one(sql` 
     UPDATE
@@ -14,7 +13,7 @@ export default async ({ id, ...input }) => {
     SET
       ${raw(fields)}
     WHERE
-      post_id = ${id}
+      post_id = ${postId}
     RETURNING *
   `)
 }

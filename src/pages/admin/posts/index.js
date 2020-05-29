@@ -7,8 +7,10 @@ const postsQuery = gql`
   {
     viewer {
       posts {
-        postId
-        title
+        entries {
+          postId
+          title
+        }
       }
     }
   }
@@ -18,6 +20,8 @@ const AdminPostsListPage = () => {
   const { loading, data } = useQuery(postsQuery)
 
   if (loading) return "Loading..."
+
+  console.log(data)
 
   return (
     <div>
@@ -30,7 +34,7 @@ const AdminPostsListPage = () => {
         </li>
       </ul>
       <ul>
-        {data?.viewer?.posts?.map(post => (
+        {data?.viewer?.posts?.entries?.map(post => (
           <li key={post.postId}>
             <Link href={"/admin/posts/[postId]"} as={`/admin/posts/${post.postId}`}>
               <a>{post.title}</a>

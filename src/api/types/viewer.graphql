@@ -15,7 +15,7 @@ type Viewer {
   users: [User]
 
   post(postId: Int!): Post!
-  posts: [Post]
+  posts: PostList
 }
 
 extend type Query {

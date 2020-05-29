@@ -42,7 +42,7 @@ export async function getStaticProps() {
 
   return {
     unstable_revalidate: 1,
-    props: { posts: [] }
+    props: { posts: data?.scope?.posts?.entries || [] }
   }
 }
 
